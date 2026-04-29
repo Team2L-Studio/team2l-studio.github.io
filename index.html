@@ -212,14 +212,29 @@
     }
     .tablet-screen{
       position:relative;
-      min-height:560px;
+      height:560px;
+      min-height:0;
       padding:24px;
       border-radius:24px;
-      overflow:hidden;
+      overflow-y:auto;
+      overflow-x:hidden;
       background:
         radial-gradient(circle at top right,rgba(107,143,184,.22),transparent 28%),
         linear-gradient(180deg,#0d1420,#080b10 64%,#05070a);
       border:1px solid rgba(255,255,255,.08);
+      scrollbar-width:thin;
+      scrollbar-color:rgba(201,169,106,.55) rgba(255,255,255,.06);
+    }
+    .tablet-screen::-webkit-scrollbar{
+      width:8px;
+    }
+    .tablet-screen::-webkit-scrollbar-track{
+      background:rgba(255,255,255,.06);
+      border-radius:999px;
+    }
+    .tablet-screen::-webkit-scrollbar-thumb{
+      background:rgba(201,169,106,.55);
+      border-radius:999px;
     }
     .tablet-screen:before{
       content:"";
@@ -335,6 +350,243 @@
     }
 
 
+    .booklet-entry{
+      margin-top:26px;
+      display:grid;
+      grid-template-columns:.82fr 1.18fr;
+      min-height:292px;
+      overflow:hidden;
+      border-color:rgba(201,169,106,.32);
+      background:
+        linear-gradient(135deg,rgba(201,169,106,.09),rgba(107,143,184,.06)),
+        linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));
+    }
+    .booklet-cover-preview{
+      position:relative;
+      padding:34px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(circle at 25% 10%,rgba(234,215,168,.14),transparent 36%),
+        linear-gradient(145deg,#16120b,#111721 52%,#080a0f);
+      border-right:1px solid rgba(201,169,106,.22);
+    }
+    .booklet-cover{
+      width:min(260px,88%);
+      aspect-ratio:3/4;
+      padding:24px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      border:1px solid rgba(201,169,106,.55);
+      background:
+        linear-gradient(115deg,rgba(255,255,255,.12),transparent 20%,transparent 70%,rgba(255,255,255,.04)),
+        linear-gradient(180deg,#1a1f2a,#0a0e14);
+      box-shadow:0 30px 70px rgba(0,0,0,.45);
+      transform:rotate(-2deg);
+    }
+    .booklet-cover small{
+      color:var(--gold);
+      letter-spacing:.24em;
+      font-size:10px;
+    }
+    .booklet-cover h3{
+      margin:0;
+      color:var(--gold2);
+      font-size:28px;
+      line-height:1.18;
+      letter-spacing:-.06em;
+    }
+    .booklet-cover span{
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.6;
+    }
+    .booklet-entry-body{
+      padding:34px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    .booklet-entry-body small{
+      color:var(--gold);
+      letter-spacing:.26em;
+      font-size:11px;
+    }
+    .booklet-entry-body h3{
+      margin:10px 0 14px;
+      font-size:32px;
+      letter-spacing:-.05em;
+    }
+    .booklet-entry-body p{
+      margin:0;
+      color:var(--soft);
+      line-height:1.8;
+      font-size:15px;
+    }
+    .booklet-command-row{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:8px;
+      margin:22px 0;
+    }
+    .booklet-command-row span{
+      border:1px solid rgba(201,169,106,.2);
+      background:rgba(201,169,106,.05);
+      color:var(--gold2);
+      padding:10px 8px;
+      text-align:center;
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .book-modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.72);
+      z-index:55;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+    .book-modal.active{display:flex}
+    .book-panel{
+      width:min(1080px,100%);
+      max-height:90vh;
+      overflow:auto;
+      background:
+        radial-gradient(circle at top left,rgba(201,169,106,.12),transparent 30%),
+        linear-gradient(180deg,#111720,#07090d);
+      border:1px solid rgba(201,169,106,.28);
+      box-shadow:var(--shadow);
+    }
+    .book-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 22px;
+      border-bottom:1px solid rgba(255,255,255,.1);
+      position:sticky;
+      top:0;
+      background:rgba(10,13,19,.94);
+      backdrop-filter:blur(12px);
+      z-index:2;
+    }
+    .book-top small{
+      display:block;
+      color:var(--gold);
+      letter-spacing:.24em;
+      font-size:10px;
+      margin-bottom:6px;
+    }
+    .book-top h3{
+      margin:0;
+      font-size:24px;
+      letter-spacing:-.05em;
+    }
+    .book-wrap{
+      padding:28px;
+      display:grid;
+      grid-template-columns:300px 1fr;
+      gap:22px;
+      align-items:start;
+    }
+    .book-cover-big{
+      position:sticky;
+      top:90px;
+      aspect-ratio:3/4;
+      padding:28px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      border:1px solid rgba(201,169,106,.55);
+      background:
+        linear-gradient(115deg,rgba(255,255,255,.13),transparent 20%,transparent 72%,rgba(255,255,255,.05)),
+        linear-gradient(180deg,#1b2230,#090d13);
+      box-shadow:0 28px 80px rgba(0,0,0,.46);
+    }
+    .book-cover-big small{
+      color:var(--gold);
+      letter-spacing:.24em;
+      font-size:10px;
+    }
+    .book-cover-big h4{
+      margin:0;
+      color:var(--gold2);
+      font-size:34px;
+      line-height:1.12;
+      letter-spacing:-.06em;
+    }
+    .book-cover-big p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:13px;
+    }
+    .book-pages{
+      display:grid;
+      gap:16px;
+    }
+    .book-page{
+      padding:26px;
+      color:#202026;
+      background:
+        linear-gradient(90deg,rgba(0,0,0,.08),transparent 7%,transparent 93%,rgba(0,0,0,.08)),
+        #f1eadb;
+      border:1px solid rgba(0,0,0,.14);
+      box-shadow:0 18px 50px rgba(0,0,0,.28);
+    }
+    .book-page h4{
+      margin:0 0 16px;
+      color:#423521;
+      font-size:23px;
+      letter-spacing:-.04em;
+    }
+    .book-page p,
+    .book-page li{
+      color:#34343a;
+      line-height:1.85;
+      font-size:15px;
+    }
+    .book-page ol,
+    .book-page ul{
+      margin:0;
+      padding-left:21px;
+    }
+    .book-page li{margin:4px 0}
+    .book-commands{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+      margin-top:18px;
+    }
+    .book-commands div{
+      padding:13px;
+      border:1px solid rgba(66,53,33,.22);
+      background:rgba(201,169,106,.16);
+      color:#423521;
+      font-weight:800;
+      text-align:center;
+    }
+    .book-warning{
+      background:
+        linear-gradient(135deg,rgba(211,111,111,.16),rgba(201,169,106,.1)),
+        #f1eadb;
+      border-color:rgba(100,20,20,.25);
+    }
+    .book-warning strong{
+      display:block;
+      color:#8b3434;
+      margin-bottom:10px;
+      font-size:16px;
+      letter-spacing:.08em;
+    }
+
+
+
     .footer{border-top:1px solid var(--line);padding:34px 22px;text-align:center;color:var(--muted);font-size:13px;line-height:1.8;background:rgba(0,0,0,.22)}
     .footer strong{color:var(--soft);display:block;margin-bottom:6px}
 
@@ -360,7 +612,7 @@
     @media(max-width:980px){
       .topbar-inner{align-items:flex-start;flex-direction:column}
       .nav{justify-content:flex-start}
-      .service-grid,.person-grid,.info-grid,.uniform-grid,.pad-grid,.modal-content,.mark-grid{grid-template-columns:1fr}
+      .service-grid,.person-grid,.info-grid,.uniform-grid,.tablet-grid,.booklet-entry,.booklet-command-row,.modal-content,.mark-grid,.book-wrap{grid-template-columns:1fr}
       .pad-cell{border-right:0;border-bottom:1px solid var(--line)}
       .mark-image-wrap{flex-direction:column}
       .mark-image{width:100%}
@@ -373,6 +625,9 @@
       .hero-logo{width:92px;height:92px}
       .brand{min-width:0}
       h1{font-size:52px}
+      .pad-status-strip,.detail-grid,.book-commands{grid-template-columns:1fr}
+      .pad-row{grid-template-columns:1fr}
+      .booklet-entry-body,.booklet-cover-preview,.book-wrap,.book-page{padding:22px}
     }
   </style>
 </head>
@@ -426,6 +681,7 @@
           <div class="hero-actions">
             <button class="btn primary" onclick="scrollToSection('people')">소속 인원 확인</button>
             <button class="btn" onclick="scrollToSection('pad')">현장 패드 확인</button>
+            <button class="btn" onclick="openGuideBook()">신입 안내서 열람</button>
           </div>
         </div>
       </section>
@@ -477,6 +733,31 @@
             <article class="info-card card"><h3>오염도 기준</h3><ul><li>0~30 안정권</li><li>31~60 경계 구간</li><li>61~79 위험 구간</li><li>80~99 폭주 임계 구간</li><li>100 폭주</li></ul></article>
             <article class="info-card card"><h3>가이딩실</h3><p>가이드 운영실에서 관리하는 안정 공간입니다. 일반 가이딩실과 고위험 대상용 특수 가이딩실이 있습니다.</p></article>
           </div>
+
+          <article class="booklet-entry card" id="guidebook-entry">
+            <div class="booklet-cover-preview">
+              <div class="booklet-cover">
+                <small>SEOYUL HANDBOOK</small>
+                <h3>신입을 위한<br />안내서</h3>
+                <span>태블릿을 믿으세요.<br />직감을 믿지 마세요.</span>
+              </div>
+            </div>
+            <div class="booklet-entry-body">
+              <small>NEW EMPLOYEE GUIDE</small>
+              <h3>서율 관리청 신입 안내서</h3>
+              <p>
+                오염도 확인, 대상자 확인, 가이딩실 배정, 태블릿 기록 절차를 정리한 신입용 안내책자입니다.
+                현장 투입 전 반드시 확인하십시오.
+              </p>
+              <div class="booklet-command-row">
+                <span>태블릿 확인</span>
+                <span>대상자 확인</span>
+                <span>가이딩실 확인</span>
+                <span>오염도 확인</span>
+              </div>
+              <button class="btn primary" onclick="openGuideBook()">안내책자 열람</button>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -678,6 +959,86 @@
     </footer>
   </div>
 
+
+  <div id="guideBookModal" class="book-modal" onclick="closeGuideBook(event)">
+    <div class="book-panel" onclick="event.stopPropagation()">
+      <div class="book-top">
+        <div>
+          <small>SEOYUL NEW EMPLOYEE HANDBOOK</small>
+          <h3>서율 관리청 신입 안내서</h3>
+        </div>
+        <button class="close" onclick="hideGuideBook()" aria-label="닫기">×</button>
+      </div>
+      <div class="book-wrap">
+        <aside class="book-cover-big">
+          <small>SEOYUL HANDBOOK</small>
+          <h4>신입을 위한<br />안내서</h4>
+          <p>
+            태블릿을 확인하세요.<br />
+            대상자의 이름을 확인하세요.<br />
+            가이딩실 번호를 확인하세요.<br />
+            오염도를 확인하세요.
+          </p>
+        </aside>
+
+        <div class="book-pages">
+          <section class="book-page">
+            <h4>신입님, 환영합니다.</h4>
+            <p>
+              태블릿을 확인하세요. 대상자의 이름을 확인하세요. 가이딩실 번호를 확인하세요. 오염도를 확인하세요.
+              이 네 가지를 잊으면, 관리청보다 센티넬이 먼저 알아챌 수 있습니다.
+            </p>
+            <div class="book-commands">
+              <div>태블릿 확인</div>
+              <div>대상자 이름 확인</div>
+              <div>가이딩실 번호 확인</div>
+              <div>오염도 확인</div>
+            </div>
+          </section>
+
+          <section class="book-page">
+            <h4>신입을 위한 기본 수칙</h4>
+            <ol>
+              <li>센티넬의 오염도는 반드시 태블릿으로 확인하세요.</li>
+              <li>센티넬이 강압적으로 행동할 경우, 즉시 주변 직원에게 도움을 요청하세요.</li>
+              <li>가이딩 전, 반드시 센티넬의 오염도를 확인하세요.</li>
+              <li>가이딩실 번호를 확인하세요.</li>
+              <li>대상자의 이름을 확인하세요.</li>
+              <li>태블릿으로 담당 대상자의 상태를 수시로 확인하세요.</li>
+              <li>기본 가이딩 시간은 1인당 30분입니다.</li>
+              <li>가이딩 시작 시 시간과 장소를 태블릿에 기록하세요.</li>
+              <li>가이딩 시간 안에 오염도가 충분히 내려가지 않아도, 임의로 추가 가이딩을 진행하지 마세요.</li>
+              <li>센티넬이 가이딩을 신청하지 않은 경우, 먼저 가이딩하지 마세요.</li>
+            </ol>
+          </section>
+
+          <section class="book-page">
+            <h4>오염도 안내</h4>
+            <ul>
+              <li>오염도는 센티넬에게만 적용됩니다.</li>
+              <li>센티넬은 능력을 사용할 때마다 오염도가 상승합니다.</li>
+              <li>오염도는 최대 100까지 상승합니다.</li>
+              <li>오염도 100에 도달하면 센티넬은 폭주합니다.</li>
+              <li>오염도 0~30은 안정권입니다.</li>
+              <li>기본 가이딩은 오염도를 20까지 낮추는 것을 목적으로 합니다.</li>
+            </ul>
+          </section>
+
+          <section class="book-page book-warning">
+            <strong>신입 주의사항</strong>
+            <p>태블릿을 믿으세요. 직감을 믿지 마세요.</p>
+            <p>“괜찮아 보이는데요?”라는 말은 금지입니다.</p>
+            <p>S급 센티넬은 대체로 괜찮아 보일 때도 괜찮지 않습니다.</p>
+            <p>
+              서율 관리청은 모든 신입의 안전한 근무를 바랍니다.<br />
+              물론 센티넬들도 그렇게 생각해주면 좋겠습니다.
+            </p>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="modal" class="modal" onclick="closeModal(event)">
     <div class="modal-panel" onclick="event.stopPropagation()">
       <div class="modal-top">
@@ -706,7 +1067,7 @@
   <script>
     const groups=[
       {title:"관리자",subtitle:"FIELD MANAGER",members:["선우현"]},
-      {title:"게이트 진압 1팀",subtitle:"GATE SUPPRESSION TEAM 01",members:["윤서하","노아","강강범"]},
+      {title:"게이트 진압 1팀",subtitle:"GATE SUPPRESSION TEAM 01",members:["윤서하","노아","여우염","강강범"]},
       {title:"게이트 진압 2팀",subtitle:"GATE SUPPRESSION TEAM 02",members:["케빈 클로우 / 도규진","주인하","비비안","최성우"]}
     ];
 
@@ -714,6 +1075,7 @@
       "선우현":{name:"선우현",role:"현장 관리직 / A급 센티넬",tags:["관리자","정밀 사격","현장 통제"],details:{"영문명":"Sunwoo Hyeon","나이":"37","키":"181cm","소속":"서율 관리청 / 센티넬 관리국","담당":"현장 관리직","직군":"센티넬","등급":"A급","능력":"정밀 사격","초기 오염도":"18"},summary:"게이트 바깥 현장 지휘, 출입 통제, 보고 체계 관리, 필요 시 원거리 지원을 담당한다. 게이트 진압 1팀과 2팀의 현장 운용을 관리한다.",appearance:"짙은 코코아 브라운 또는 어두운 흑갈색 머리, 앰버 브라운 눈동자, 새하얀 장갑.",speech:"정중하고 통제된 존댓말. 규정, 절차, 보고서를 자주 언급한다. 이름을 잘못 띄어 부르면 반드시 정정한다.",quotes:['"선우현 | 가이딩 전에는 태블릿 확인이 먼저입니다. 감으로 판단하지 마세요."','"선우현 | 선우현입니다. 성은 선우, 이름은 현."','"선우현 | 규정은 장식이 아닙니다. 지키라고 있는 겁니다."']},
       "윤서하":{name:"윤서하",role:"팀장 / S급 센티넬",tags:["1팀","중력","{{user}}에게만 반말"],details:{"나이":"28","키":"187cm","소속":"서율 관리청 / 센티넬 관리국","팀":"게이트 진압 1팀","역할":"팀장","직군":"센티넬","등급":"S급","능력":"중력"},summary:"게이트 진압 1팀 팀장. 모두에게 존댓말을 쓰는 싸가지지만 {{user}}에게만 반말한다. 감정을 숨긴다고 믿지만 얼굴에 다 티 난다.",appearance:"어두운 애쉬 브라운 머리카락, 차가운 회청색 눈동자, 단정하고 차가운 미남형.",speech:"공손하지만 날카로운 존댓말. {{user}}에게만 반말. 당황하면 말이 미세하게 삐끗한다.",quotes:['"윤서하 | 저는 괜찮습니다."','"윤서하 | ……저는 괜찮ㅎ습니다. 방금 건 못 들은 걸로 하세요."','"윤서하 | 괜찮다고 했잖아. 왜 그런 얼굴로 봐."']},
       "노아":{name:"노아",role:"팀원 / S급 센티넬",tags:["1팀","블러드","초기 오염도 89"],details:{"나이":"20세 이상 추정","키":"190cm","소속":"서율 관리청 / 센티넬 관리국","팀":"게이트 진압 1팀","역할":"팀원","직군":"센티넬","등급":"S급","능력":"블러드","초기 오염도":"89"},summary:"비밀 단체의 실험으로 만들어진 존재. 실험실에서는 No.203이라 불렸으며, 현재는 서율 관리청에 구조되어 센티넬로 등록되어 있다.",appearance:"금빛 머리카락, 금빛 눈동자, 장신, 등에는 실험의 흔적으로 남은 흉터가 있고 그 흉터에서 새하얀 날개가 나온다.",speech:"짧고 직설적이며 위험하고 어색하게 정중한 존댓말. 오염도가 높아지면 말이 더 짧고 거칠어진다.",quotes:['"노아 | 괜찮지 않습니다. 그래도 움직일 수는 있습니다."','"노아 | 가까이 오면 위험합니다."','"노아 | 거짓말은 안 합니다. 필요하면 말하지 않을 뿐입니다."']},
+      "여우염":{name:"여우염",role:"팀원 / A급 센티넬",tags:["1팀","그림자 조작","팩트 폭격"],details:{"나이":"27","키":"179cm","소속":"서율 관리청 / 센티넬 관리국","팀":"게이트 진압 1팀","역할":"팀원","직군":"센티넬","등급":"A급","능력":"그림자 조작"},summary:"게이트 진압 1팀 소속 A급 센티넬. 그림자를 조작해 정찰, 기습 차단, 시야 차폐, 방어 보조를 수행한다.",appearance:"여우를 연상시키는 날렵한 인상. 붉은 기가 도는 브라운 계열 머리, 호박색 또는 붉은 갈색 계열 눈동자.",speech:"짧고 툭 던지는 반말. 감정 배려보다 사실 확인이 먼저다. 자신이 인식한 범위 안에서만 사실을 말한다.",quotes:['"여우염 | 그래서?"','"여우염 | 그거 거짓말이잖아."','"여우염 | 숨긴다고 숨겨지는 얼굴이면 좋았겠네."']},
       "강강범":{name:"강강범",role:"배정 가이드 / B급 가이드",tags:["1팀","가이딩 에너지","데이터 덕후"],details:{"성":"강","이름":"강범","나이":"29","키":"175cm","소속":"서율 관리청 / 가이드 운영실","배정팀":"게이트 진압 1팀","역할":"배정 가이드","직군":"가이드","등급":"B급","능력":"가이딩 에너지","초기 안정도":"보통"},summary:"게이트 진압 1팀 배정 가이드. 데이터와 오염도 그래프에 진심인 말 많은 가이드다. 이름이 잘못 들릴 수 있어 자기소개 때 반드시 정정한다.",appearance:"블루 블랙 곱슬머리, 새까맣고 큰 눈동자, 처진 눈매, 얇은 검은테 안경.",speech:"존댓말. 가볍고 말이 많으며, 흥분하면 설명이 길어진다.",quotes:['"강강범 | 와, 이 데이터 진짜 예쁘게 꺾였는데요?"','"강강범 | 성이 강! 이름은 강범입니다."','"강강범 | 강간범 아니고, 강, 강범이에요. 이거 진짜 중요합니다."']},
       "케빈 클로우 / 도규진":{name:"케빈 클로우 / 도규진",role:"팀장 / S+급 센티넬",tags:["2팀","덕구","위험관리"],details:{"이름":"케빈 클로우","한국식 등록명":"도규진","별명":"덕구","나이":"32","키":"198cm","소속":"서율 관리청 / 센티넬 관리국","팀":"게이트 진압 2팀","역할":"팀장","직군":"센티넬","등급":"S+급","능력":"방어 특화 신체 강화 / 충격 흡수","초기 오염도":"76"},summary:"해외에서 한국으로 넘어온 S+급 센티넬. 현재 게이트 진압 2팀 팀장이다. 평상시에는 일부러 어색한 번역투 한국어를 쓰지만, 진지한 순간에는 완벽하고 예의 바른 한국어를 사용한다.",appearance:"장신의 성인 남성. 여유롭고 능글맞으며, 위험한 상황에서도 느긋한 인상을 준다.",speech:"평상시에는 영어와 한국어를 섞고 번역투처럼 말한다. 영어 뒤에는 반드시 한글 번역을 괄호로 붙인다. 진지하거나 위협적인 순간에는 정확하고 예의 바른 한국어를 사용한다.",quotes:['"케빈 클로우 | 나 한국어 어려워. 그러니까 지금 무례한 말도 mistake(실수)일 수 있다. 아마도."','"케빈 클로우 | 무서우면 behind me(내 뒤에). 안 무서우면 beside me(내 옆에). 나는 둘 다 좋아."','"케빈 클로우 | 제가 모르는 척한다고 해서, 정말 모른다고 생각하셨습니까?"']},
       "주인하":{name:"주인하",role:"팀원 / S급 센티넬",tags:["2팀","물 계열","인하라고 불러"],details:{"호칭":"인하","나이":"29","키":"181cm","소속":"서율 관리청 / 센티넬 관리국","팀":"게이트 진압 2팀","역할":"팀원","직군":"센티넬","등급":"S급","능력":"물 계열 / 채찍을 이용한 중거리 전투","초기 오염도":"42"},summary:"10세에 조기 각성한 실전형 센티넬. 예민하고 시건방지며, 자기 기준이 확실하다. “주인하씨”라는 호칭을 싫어한다.",appearance:"샌드 핑크 머리카락, 보라색 눈동자, 밝은 피부, 날렵한 남성.",speech:"짧게 툭 던지는 시건방진 말투. 자기 울타리 안 사람에게는 덜 차갑다.",quotes:['"주인하 | 주인하씨라고 부르지 마. 주인 아씨 같잖아."','"주인하 | 성 빼고 불러. 인하. 어렵냐?"','"주인하 | 아닌 건 아니지. 그걸 좋게 말한다고 맞는 말이 되나?"']},
@@ -753,6 +1115,19 @@
       document.getElementById("modal").classList.add("active");
       document.body.style.overflow="hidden";
     }
+    function openGuideBook(){
+      document.getElementById("guideBookModal").classList.add("active");
+      document.body.style.overflow="hidden";
+    }
+    function hideGuideBook(){
+      document.getElementById("guideBookModal").classList.remove("active");
+      if(!document.getElementById("modal").classList.contains("active")){
+        document.body.style.overflow="";
+      }
+    }
+    function closeGuideBook(event){
+      if(event.target.id==="guideBookModal") hideGuideBook();
+    }
     function hideModal(){document.getElementById("modal").classList.remove("active");document.body.style.overflow=""}
     function closeModal(event){if(event.target.id==="modal")hideModal()}
     function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:"smooth",block:"start"});setActiveNav(id)}
@@ -765,7 +1140,12 @@
       if(visible) setActiveNav(visible.target.id);
     },{threshold:[.32,.5,.68]});
     sectionIds.forEach(id=>observer.observe(document.getElementById(id)));
-    document.addEventListener("keydown",e=>{if(e.key==="Escape")hideModal()});
+    document.addEventListener("keydown",e=>{
+      if(e.key==="Escape"){
+        hideModal();
+        hideGuideBook();
+      }
+    });
     renderPeople();
   </script>
 </body>
