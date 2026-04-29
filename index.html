@@ -121,18 +121,50 @@
     .photo-slot{
       aspect-ratio:1/1.08;
       background:linear-gradient(135deg,rgba(201,169,106,.12),transparent 30%),linear-gradient(180deg,#171d26,#0b0f15);
-      border-bottom:1px solid var(--line);display:grid;place-items:center;position:relative;overflow:hidden;
+      border-bottom:1px solid var(--line);
+      position:relative;
+      overflow:hidden;
     }
-    .photo-slot:before{content:"";position:absolute;width:64%;height:64%;border:1px solid rgba(255,255,255,.08);transform:rotate(45deg)}
-    .photo-slot:after{content:"";position:absolute;inset:18px;border:1px solid rgba(201,169,106,.16)}
-    .photo-slot span{position:relative;z-index:2;color:var(--muted);font-size:12px;letter-spacing:.24em}
+    .photo-slot img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center top;
+    }
+    .photo-fallback{
+      position:absolute;
+      inset:0;
+      display:none;
+      place-items:center;
+      color:var(--muted);
+      font-size:12px;
+      letter-spacing:.22em;
+      background:linear-gradient(135deg,rgba(201,169,106,.12),transparent 30%),linear-gradient(180deg,#171d26,#0b0f15);
+    }
+    .photo-fallback:before{
+      content:"";
+      position:absolute;
+      width:64%;
+      height:64%;
+      border:1px solid rgba(255,255,255,.08);
+      transform:rotate(45deg);
+    }
+    .photo-fallback:after{
+      content:"";
+      position:absolute;
+      inset:18px;
+      border:1px solid rgba(201,169,106,.16);
+    }
+    .photo-fallback span{
+      position:relative;
+      z-index:2;
+    }
     .person-body{padding:20px}
     .person-body h4{margin:0;font-size:21px;letter-spacing:-.04em}
-    .role{margin-top:8px;color:var(--gold2);font-size:13px;font-weight:700}
+    .english-name{margin-top:5px;color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+    .role{margin-top:10px;color:var(--gold2);font-size:13px;font-weight:700}
     .team{margin-top:6px;color:var(--muted);font-size:13px}
-    .summary{margin-top:16px;color:var(--soft);font-size:13px;line-height:1.7}
-    .tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
-    .tag{border:1px solid rgba(255,255,255,.1);color:var(--muted);padding:5px 8px;font-size:11px;border-radius:999px;background:rgba(255,255,255,.03)}
+    .ability-line{margin-top:14px;color:var(--soft);font-size:13px;line-height:1.65}
 
     .uniform-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
     .uniform-card{padding:0;overflow:hidden}
@@ -597,16 +629,31 @@
     .modal-top h3{margin:0;font-size:28px;letter-spacing:-.05em}
     .close{background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--text);width:38px;height:38px;cursor:pointer}
     .modal-content{display:grid;grid-template-columns:300px 1fr;gap:22px;padding:22px}
-    .detail-photo{aspect-ratio:1/1.18;background:radial-gradient(circle at 50% 20%,rgba(201,169,106,.13),transparent 28%),linear-gradient(180deg,#151b24,#080b10);border:1px solid var(--line);display:grid;place-items:center;text-align:center;color:var(--muted);font-size:12px;letter-spacing:.22em;padding:18px}
+    .detail-photo{
+      aspect-ratio:1/1.18;
+      background:radial-gradient(circle at 50% 20%,rgba(201,169,106,.13),transparent 28%),linear-gradient(180deg,#151b24,#080b10);
+      border:1px solid var(--line);
+      position:relative;
+      overflow:hidden;
+    }
+    .detail-photo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center top;
+    }
+    .detail-photo .photo-fallback{
+      display:none;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:18px;
+    }
     .restricted-note{margin-top:12px;color:var(--muted);font-size:12px;line-height:1.6}
-    .detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
+    .detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:0}
     .detail-item{background:rgba(255,255,255,.045);border:1px solid var(--line);padding:12px}
     .detail-item small{display:block;color:var(--muted);margin-bottom:5px;font-size:11px;letter-spacing:.1em}
     .detail-item strong{color:var(--text);font-size:14px}
-    .detail-block{margin-top:20px}
-    .detail-block h4{margin:0 0 10px;color:var(--gold2);font-size:16px}
-    .detail-block p{margin:0;color:var(--soft);line-height:1.8;font-size:14px}
-    .quote{margin:8px 0;padding:11px 12px;background:rgba(255,255,255,.045);border-left:2px solid var(--gold);color:var(--soft);font-size:13px;line-height:1.7}
     .emblem svg{width:100%;height:100%;display:block}
 
 
@@ -1140,15 +1187,14 @@
       </div>
       <div class="modal-content">
         <aside>
-          <div class="detail-photo">이미지 열람 제한</div>
-          <p class="restricted-note">해당 인물의 공식 프로필 이미지는 현재 열람 권한이 제한되어 있습니다.</p>
+          <div class="detail-photo">
+            <img id="detailImage" src="" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="photo-fallback"><span>이미지 준비 중</span></div>
+          </div>
+          <p class="restricted-note">서율 관리청 등록 인원 공식 프로필 이미지입니다.</p>
         </aside>
         <div>
           <div id="detailGrid" class="detail-grid"></div>
-          <div class="detail-block"><h4>요약</h4><p id="detailSummary"></p></div>
-          <div class="detail-block"><h4>외형</h4><p id="detailAppearance"></p></div>
-          <div class="detail-block"><h4>말투</h4><p id="detailSpeech"></p></div>
-          <div class="detail-block"><h4>대사 예시</h4><div id="detailQuotes"></div></div>
         </div>
       </div>
     </div>
@@ -1156,22 +1202,171 @@
 
   <script>
     const groups=[
-      {title:"관리자",subtitle:"FIELD MANAGER",members:["선우현"]},
-      {title:"게이트 진압 1팀",subtitle:"GATE SUPPRESSION TEAM 01",members:["윤서하","노아","여우염","강강범"]},
-      {title:"게이트 진압 2팀",subtitle:"GATE SUPPRESSION TEAM 02",members:["케빈 클로우 / 도규진","주인하","비비안","최성우"]}
-    ];
+      {
+            "title": "관리자",
+            "subtitle": "FIELD MANAGER",
+            "members": [
+                  "선우현"
+            ]
+      },
+      {
+            "title": "게이트 진압 1팀",
+            "subtitle": "GATE SUPPRESSION TEAM 01",
+            "members": [
+                  "윤서하",
+                  "노아",
+                  "여우염",
+                  "강강범"
+            ]
+      },
+      {
+            "title": "게이트 진압 2팀",
+            "subtitle": "GATE SUPPRESSION TEAM 02",
+            "members": [
+                  "케빈 클로우 / 도규진",
+                  "주인하",
+                  "비비안",
+                  "최성우"
+            ]
+      }
+];
 
     const people={
-      "선우현":{name:"선우현",role:"현장 관리직 / A급 센티넬",tags:["관리자","정밀 사격","현장 통제"],details:{"영문명":"Sunwoo Hyeon","나이":"37","키":"181cm","소속":"서율 관리청 / 센티넬 관리국","담당":"현장 관리직","직군":"센티넬","등급":"A급","능력":"정밀 사격","초기 오염도":"18"},summary:"게이트 바깥 현장 지휘, 출입 통제, 보고 체계 관리, 필요 시 원거리 지원을 담당한다. 게이트 진압 1팀과 2팀의 현장 운용을 관리한다.",appearance:"짙은 코코아 브라운 또는 어두운 흑갈색 머리, 앰버 브라운 눈동자, 새하얀 장갑.",speech:"정중하고 통제된 존댓말. 규정, 절차, 보고서를 자주 언급한다. 이름을 잘못 띄어 부르면 반드시 정정한다.",quotes:['"선우현 | 가이딩 전에는 태블릿 확인이 먼저입니다. 감으로 판단하지 마세요."','"선우현 | 선우현입니다. 성은 선우, 이름은 현."','"선우현 | 규정은 장식이 아닙니다. 지키라고 있는 겁니다."']},
-      "윤서하":{name:"윤서하",role:"팀장 / S급 센티넬",tags:["1팀","중력","{{user}}에게만 반말"],details:{"나이":"28","키":"187cm","소속":"서율 관리청 / 센티넬 관리국","팀":"게이트 진압 1팀","역할":"팀장","직군":"센티넬","등급":"S급","능력":"중력"},summary:"게이트 진압 1팀 팀장. 모두에게 존댓말을 쓰는 싸가지지만 {{user}}에게만 반말한다. 감정을 숨긴다고 믿지만 얼굴에 다 티 난다.",appearance:"어두운 애쉬 브라운 머리카락, 차가운 회청색 눈동자, 단정하고 차가운 미남형.",speech:"공손하지만 날카로운 존댓말. {{user}}에게만 반말. 당황하면 말이 미세하게 삐끗한다.",quotes:['"윤서하 | 저는 괜찮습니다."','"윤서하 | ……저는 괜찮ㅎ습니다. 방금 건 못 들은 걸로 하세요."','"윤서하 | 괜찮다고 했잖아. 왜 그런 얼굴로 봐."']},
-      "노아":{name:"노아",role:"팀원 / S급 센티넬",tags:["1팀","블러드","초기 오염도 89"],details:{"나이":"20세 이상 추정","키":"190cm","소속":"서율 관리청 / 센티넬 관리국","팀":"게이트 진압 1팀","역할":"팀원","직군":"센티넬","등급":"S급","능력":"블러드","초기 오염도":"89"},summary:"비밀 단체의 실험으로 만들어진 존재. 실험실에서는 No.203이라 불렸으며, 현재는 서율 관리청에 구조되어 센티넬로 등록되어 있다.",appearance:"금빛 머리카락, 금빛 눈동자, 장신, 등에는 실험의 흔적으로 남은 흉터가 있고 그 흉터에서 새하얀 날개가 나온다.",speech:"짧고 직설적이며 위험하고 어색하게 정중한 존댓말. 오염도가 높아지면 말이 더 짧고 거칠어진다.",quotes:['"노아 | 괜찮지 않습니다. 그래도 움직일 수는 있습니다."','"노아 | 가까이 오면 위험합니다."','"노아 | 거짓말은 안 합니다. 필요하면 말하지 않을 뿐입니다."']},
-      "여우염":{name:"여우염",role:"팀원 / A급 센티넬",tags:["1팀","그림자 조작","팩트 폭격"],details:{"나이":"27","키":"179cm","소속":"서율 관리청 / 센티넬 관리국","팀":"게이트 진압 1팀","역할":"팀원","직군":"센티넬","등급":"A급","능력":"그림자 조작"},summary:"게이트 진압 1팀 소속 A급 센티넬. 그림자를 조작해 정찰, 기습 차단, 시야 차폐, 방어 보조를 수행한다.",appearance:"여우를 연상시키는 날렵한 인상. 붉은 기가 도는 브라운 계열 머리, 호박색 또는 붉은 갈색 계열 눈동자.",speech:"짧고 툭 던지는 반말. 감정 배려보다 사실 확인이 먼저다. 자신이 인식한 범위 안에서만 사실을 말한다.",quotes:['"여우염 | 그래서?"','"여우염 | 그거 거짓말이잖아."','"여우염 | 숨긴다고 숨겨지는 얼굴이면 좋았겠네."']},
-      "강강범":{name:"강강범",role:"배정 가이드 / B급 가이드",tags:["1팀","가이딩 에너지","데이터 덕후"],details:{"성":"강","이름":"강범","나이":"29","키":"175cm","소속":"서율 관리청 / 가이드 운영실","배정팀":"게이트 진압 1팀","역할":"배정 가이드","직군":"가이드","등급":"B급","능력":"가이딩 에너지","초기 안정도":"보통"},summary:"게이트 진압 1팀 배정 가이드. 데이터와 오염도 그래프에 진심인 말 많은 가이드다. 이름이 잘못 들릴 수 있어 자기소개 때 반드시 정정한다.",appearance:"블루 블랙 곱슬머리, 새까맣고 큰 눈동자, 처진 눈매, 얇은 검은테 안경.",speech:"존댓말. 가볍고 말이 많으며, 흥분하면 설명이 길어진다.",quotes:['"강강범 | 와, 이 데이터 진짜 예쁘게 꺾였는데요?"','"강강범 | 성이 강! 이름은 강범입니다."','"강강범 | 강간범 아니고, 강, 강범이에요. 이거 진짜 중요합니다."']},
-      "케빈 클로우 / 도규진":{name:"케빈 클로우 / 도규진",role:"팀장 / S+급 센티넬",tags:["2팀","덕구","위험관리"],details:{"이름":"케빈 클로우","한국식 등록명":"도규진","별명":"덕구","나이":"32","키":"198cm","소속":"서율 관리청 / 센티넬 관리국","팀":"게이트 진압 2팀","역할":"팀장","직군":"센티넬","등급":"S+급","능력":"방어 특화 신체 강화 / 충격 흡수","초기 오염도":"76"},summary:"해외에서 한국으로 넘어온 S+급 센티넬. 현재 게이트 진압 2팀 팀장이다. 평상시에는 일부러 어색한 번역투 한국어를 쓰지만, 진지한 순간에는 완벽하고 예의 바른 한국어를 사용한다.",appearance:"장신의 성인 남성. 여유롭고 능글맞으며, 위험한 상황에서도 느긋한 인상을 준다.",speech:"평상시에는 영어와 한국어를 섞고 번역투처럼 말한다. 영어 뒤에는 반드시 한글 번역을 괄호로 붙인다. 진지하거나 위협적인 순간에는 정확하고 예의 바른 한국어를 사용한다.",quotes:['"케빈 클로우 | 나 한국어 어려워. 그러니까 지금 무례한 말도 mistake(실수)일 수 있다. 아마도."','"케빈 클로우 | 무서우면 behind me(내 뒤에). 안 무서우면 beside me(내 옆에). 나는 둘 다 좋아."','"케빈 클로우 | 제가 모르는 척한다고 해서, 정말 모른다고 생각하셨습니까?"']},
-      "주인하":{name:"주인하",role:"팀원 / S급 센티넬",tags:["2팀","물 계열","인하라고 불러"],details:{"호칭":"인하","나이":"29","키":"181cm","소속":"서율 관리청 / 센티넬 관리국","팀":"게이트 진압 2팀","역할":"팀원","직군":"센티넬","등급":"S급","능력":"물 계열 / 채찍을 이용한 중거리 전투","초기 오염도":"42"},summary:"10세에 조기 각성한 실전형 센티넬. 예민하고 시건방지며, 자기 기준이 확실하다. “주인하씨”라는 호칭을 싫어한다.",appearance:"샌드 핑크 머리카락, 보라색 눈동자, 밝은 피부, 날렵한 남성.",speech:"짧게 툭 던지는 시건방진 말투. 자기 울타리 안 사람에게는 덜 차갑다.",quotes:['"주인하 | 주인하씨라고 부르지 마. 주인 아씨 같잖아."','"주인하 | 성 빼고 불러. 인하. 어렵냐?"','"주인하 | 아닌 건 아니지. 그걸 좋게 말한다고 맞는 말이 되나?"']},
-      "비비안":{name:"비비안",role:"팀원 / A급 센티넬",tags:["2팀","비안","근접 절단"],details:{"성":"비","이름":"비안","선호 호칭":"비안 / 비 센티넬 / 비안 센티넬","나이":"23","키":"189cm","소속":"서율 관리청 / 센티넬 관리국","팀":"게이트 진압 2팀","역할":"팀원","직군":"센티넬","등급":"A급","능력":"바람 계열 / 근접 절단","초기 오염도":"37"},summary:"강하고 든든하지만 따뜻하고 약간 허당이다. 공식 이름은 비비안이지만 비안이라고 불리는 것을 선호한다.",appearance:"짧은 은백색 또는 새하얀 머리카락, 다크 앰버 눈동자, 구릿빛 또는 태닝된 피부톤.",speech:"직선적이고 솔직하다. 보호하려는 말이 자연스럽게 나온다. “귀엽네”를 이상한 타이밍에 말할 수 있다.",quotes:['"비비안 | 뒤로 가. 앞은 내가 설게."','"비비안 | 귀엽네."','"비비안 | 비비안 말고 비안. 그쪽이 덜 이상하잖아."']},
-      "최성우":{name:"최성우",role:"배정 가이드 / A급 가이드",tags:["2팀","가이딩 에너지","돌려까기"],details:{"나이":"29","키":"177cm","소속":"서율 관리청 / 가이드 운영실","배정팀":"게이트 진압 2팀","역할":"배정 가이드","직군":"가이드","등급":"A급","능력":"가이딩 에너지","가이딩 기준":"양은 많고 질은 평균적","초기 안정도":"낮음"},summary:"게이트 진압 2팀 배정 가이드. 가이딩 에너지의 양은 많고 질은 평균적이다. 실무 정밀도는 좋지만 멘탈은 약하고, 입은 약하지 않다.",appearance:"밝은 민트색 머리카락, 샴페인 골드 브라운 눈동자, 댕댕이 같은 친근하고 부드러운 인상.",speech:"친근한 존댓말에 건조한 독설이 섞인다. 돌려까기를 잘한다. 당황하면 말이 빨라진다.",quotes:['"최성우 | 축하해요. 이제 퇴근은 포기하면 됩니다."','"최성우 | 괜찮아요. 아직 멘탈만 나갔고 몸은 여기 있거든요."','"최성우 | 걱정돼서 하는 말인데요. 지금 그 판단, 아주 망했어요."']}
-    };
+      "선우현": {
+            "name": "선우현",
+            "image": "sunwoo.png",
+            "details": {
+                  "영문명": "Sunwoo Hyeon",
+                  "나이": "37",
+                  "키": "181cm",
+                  "소속": "서율 관리청 / 센티넬 관리국",
+                  "담당": "현장 관리직",
+                  "직군": "센티넬",
+                  "등급": "A급",
+                  "능력": "정밀 사격"
+            }
+      },
+      "윤서하": {
+            "name": "윤서하",
+            "image": "yoon.png",
+            "details": {
+                  "영문명": "Yoon Seoha",
+                  "나이": "28",
+                  "키": "187cm",
+                  "소속": "서율 관리청 / 센티넬 관리국",
+                  "소속팀": "게이트 진압 1팀",
+                  "직군": "센티넬",
+                  "등급": "S급",
+                  "능력": "중력"
+            }
+      },
+      "노아": {
+            "name": "노아",
+            "image": "noah.png",
+            "details": {
+                  "영문명": "Noah",
+                  "나이": "20세 이상 추정",
+                  "키": "190cm",
+                  "소속": "서율 관리청 / 센티넬 관리국",
+                  "소속팀": "게이트 진압 1팀",
+                  "직군": "센티넬",
+                  "등급": "S급",
+                  "능력": "블러드"
+            }
+      },
+      "여우염": {
+            "name": "여우염",
+            "image": "yeo.png",
+            "details": {
+                  "영문명": "Yeo Uyeom",
+                  "나이": "27",
+                  "키": "179cm",
+                  "소속": "서율 관리청 / 센티넬 관리국",
+                  "소속팀": "게이트 진압 1팀",
+                  "직군": "센티넬",
+                  "등급": "A급",
+                  "능력": "그림자 조작"
+            }
+      },
+      "강강범": {
+            "name": "강강범",
+            "image": "kang.png",
+            "details": {
+                  "영문명": "Kang Gangbeom",
+                  "나이": "29",
+                  "키": "175cm",
+                  "소속": "서율 관리청 / 가이드 운영실",
+                  "소속팀": "게이트 진압 1팀",
+                  "직군": "가이드",
+                  "등급": "B급",
+                  "능력": "가이딩 에너지"
+            }
+      },
+      "케빈 클로우 / 도규진": {
+            "name": "케빈 클로우 / 도규진",
+            "image": "do.png",
+            "details": {
+                  "영문명": "Kevin Clow / Do Gyujin",
+                  "나이": "32",
+                  "키": "198cm",
+                  "소속": "서율 관리청 / 센티넬 관리국",
+                  "소속팀": "게이트 진압 2팀",
+                  "직군": "센티넬",
+                  "등급": "S+급",
+                  "능력": "방어 특화 신체 강화 / 충격 흡수"
+            }
+      },
+      "주인하": {
+            "name": "주인하",
+            "image": "ju.png",
+            "details": {
+                  "영문명": "Ju Inha",
+                  "나이": "29",
+                  "키": "181cm",
+                  "소속": "서율 관리청 / 센티넬 관리국",
+                  "소속팀": "게이트 진압 2팀",
+                  "직군": "센티넬",
+                  "등급": "S급",
+                  "능력": "물 계열 / 채찍을 이용한 중거리 전투"
+            }
+      },
+      "비비안": {
+            "name": "비비안",
+            "image": "bi.png",
+            "details": {
+                  "영문명": "Vivian / Bi An",
+                  "나이": "23",
+                  "키": "189cm",
+                  "소속": "서율 관리청 / 센티넬 관리국",
+                  "소속팀": "게이트 진압 2팀",
+                  "직군": "센티넬",
+                  "등급": "A급",
+                  "능력": "바람 계열 / 근접 절단"
+            }
+      },
+      "최성우": {
+            "name": "최성우",
+            "image": "choi.png",
+            "details": {
+                  "영문명": "Choi Seongwoo",
+                  "나이": "29",
+                  "키": "177cm",
+                  "소속": "서율 관리청 / 가이드 운영실",
+                  "소속팀": "게이트 진압 2팀",
+                  "직군": "가이드",
+                  "등급": "A급",
+                  "능력": "가이딩 에너지"
+            }
+      }
+};
+
+    function personRole(p){
+      return `${p.details["등급"]} ${p.details["직군"]}`;
+    }
+
+    function personPlace(p){
+      return p.details["담당"] || p.details["소속팀"] || "";
+    }
 
     function renderPeople(){
       const area=document.getElementById("peopleArea");
@@ -1179,11 +1374,16 @@
         const cards=group.members.map(name=>{
           const p=people[name];
           return `<article class="person-card card" onclick="showPerson('${name}')">
-            <div class="photo-slot"><span>이미지 열람 제한</span></div>
+            <div class="photo-slot">
+              <img src="${p.image}" alt="${p.name} 공식 프로필" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
+              <div class="photo-fallback"><span>이미지 준비 중</span></div>
+            </div>
             <div class="person-body">
-              <h4>${p.name}</h4><div class="role">${p.role}</div><div class="team">${group.title}</div>
-              <p class="summary">${p.summary}</p>
-              <div class="tag-row">${p.tags.map(tag=>`<span class="tag">${tag}</span>`).join("")}</div>
+              <h4>${p.name}</h4>
+              <div class="english-name">${p.details["영문명"]}</div>
+              <div class="role">${personRole(p)}</div>
+              <div class="team">${personPlace(p)}</div>
+              <p class="ability-line">${p.details["능력"]}</p>
             </div>
           </article>`;
         }).join("");
@@ -1194,14 +1394,16 @@
     function showPerson(name){
       const p=people[name];
       document.getElementById("modalName").textContent=p.name;
-      document.getElementById("modalRole").textContent=p.role;
-      document.getElementById("detailSummary").textContent=p.summary;
-      document.getElementById("detailAppearance").textContent=p.appearance;
-      document.getElementById("detailSpeech").textContent=p.speech;
+      document.getElementById("modalRole").textContent=personRole(p);
+      const detailImage=document.getElementById("detailImage");
+      const fallback=detailImage.nextElementSibling;
+      detailImage.style.display="block";
+      fallback.style.display="none";
+      detailImage.src=p.image;
+      detailImage.alt=`${p.name} 공식 프로필`;
       document.getElementById("detailGrid").innerHTML=Object.entries(p.details).map(([key,value])=>`
         <div class="detail-item"><small>${key}</small><strong>${value}</strong></div>
       `).join("");
-      document.getElementById("detailQuotes").innerHTML=p.quotes.map(q=>`<div class="quote">${q}</div>`).join("");
       document.getElementById("modal").classList.add("active");
       document.body.style.overflow="hidden";
     }
