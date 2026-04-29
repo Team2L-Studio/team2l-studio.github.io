@@ -628,7 +628,76 @@
       .pad-status-strip,.detail-grid,.book-commands{grid-template-columns:1fr}
       .pad-row{grid-template-columns:1fr}
       .booklet-entry-body,.booklet-cover-preview,.book-wrap,.book-page{padding:22px}
+
+      /* 모바일에서는 태블릿 프레임이 세로로 과하게 늘어나지 않도록 고정 높이를 줄이고, 내용만 내부 스크롤 처리 */
+      .tablet-grid{gap:18px}
+      .tablet-device{
+        width:min(100%,430px);
+        margin:0 auto;
+        padding:10px;
+        border-radius:22px;
+      }
+      .tablet-device:before{
+        inset:5px;
+        border-radius:18px;
+      }
+      .tablet-camera{
+        top:6px;
+        width:34px;
+        height:4px;
+      }
+      .tablet-screen{
+        height:clamp(360px,64vh,440px);
+        padding:16px;
+        border-radius:16px;
+      }
+      .pad-header{
+        gap:10px;
+        margin-bottom:14px;
+        padding-bottom:14px;
+      }
+      .pad-title-main{font-size:20px}
+      .pad-mode{
+        padding:6px 8px;
+        font-size:10px;
+      }
+      .pad-box{padding:12px}
+      .pad-box strong{font-size:17px}
+      .pad-action{
+        padding:14px;
+        font-size:13px;
+      }
     }
+  
+    /* 안내책자 본문 가시성 보정 */
+    .book-panel{max-height:90vh;overflow:auto;}
+    .book-page{min-height:0;}
+    .book-page p,.book-page li{color:#2f3138;}
+    .book-page h4{color:#3f321f;}
+    .book-reader-note{margin:14px 0 0;padding:12px 14px;border:1px solid rgba(66,53,33,.18);background:rgba(201,169,106,.13);color:#423521;font-size:13px;line-height:1.65;font-weight:700;}
+    @media(max-width:980px){
+      .book-wrap{display:block;padding:18px;}
+      .book-cover-big{position:relative;top:auto;max-width:none;width:100%;aspect-ratio:auto;min-height:0;padding:20px;margin-bottom:14px;}
+      .book-cover-big h4{font-size:25px;line-height:1.18;margin:14px 0;}
+      .book-cover-big p{font-size:13px;line-height:1.6;}
+      .book-pages{display:grid;gap:12px;}
+      .book-page{padding:19px;}
+      .book-page h4{font-size:20px;}
+      .book-page p,.book-page li{font-size:14px;line-height:1.75;}
+    }
+    @media(max-width:620px){
+      .book-modal{padding:10px;align-items:flex-start;}
+      .book-panel{width:100%;max-height:calc(100vh - 20px);}
+      .book-top{padding:14px 15px;}
+      .book-top h3{font-size:20px;}
+      .book-top small{letter-spacing:.14em;font-size:9px;}
+      .book-wrap{padding:14px;}
+      .book-cover-big{padding:16px;}
+      .book-cover-big h4{font-size:22px;}
+      .book-commands{grid-template-columns:1fr 1fr;}
+      .book-commands div{padding:10px 8px;font-size:13px;}
+    }
+
   </style>
 </head>
 <body>
@@ -979,6 +1048,7 @@
             가이딩실 번호를 확인하세요.<br />
             오염도를 확인하세요.
           </p>
+          <div class="book-reader-note">본문은 아래 안내 페이지에 바로 표시됩니다.</div>
         </aside>
 
         <div class="book-pages">
