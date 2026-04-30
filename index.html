@@ -731,11 +731,12 @@
       object-fit:contain;
       filter:drop-shadow(0 24px 60px rgba(0,0,0,.55));
     }
-    .modal-panel{width:min(960px,100%);max-height:88vh;overflow:auto;background:#0d1118;border:1px solid rgba(201,169,106,.22);box-shadow:var(--shadow)}
-    .modal-top{display:flex;justify-content:space-between;gap:18px;padding:22px;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(13,17,24,.95);backdrop-filter:blur(10px);z-index:2}
+    .modal-panel{width:min(1120px,100%);max-height:88vh;overflow:hidden;background:#0d1118;border:1px solid rgba(201,169,106,.22);box-shadow:var(--shadow)}
+    .modal-top{display:flex;justify-content:space-between;gap:18px;padding:22px;border-bottom:1px solid var(--line);background:rgba(13,17,24,.95);backdrop-filter:blur(10px);z-index:2}
     .modal-top h3{margin:0;font-size:28px;letter-spacing:-.05em}
     .close{background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--text);width:38px;height:38px;cursor:pointer}
-    .modal-content{display:grid;grid-template-columns:300px 1fr;gap:22px;padding:22px}
+    .modal-content{display:grid;grid-template-columns:320px minmax(0,1fr);gap:22px;padding:22px;max-height:calc(88vh - 84px);overflow:hidden}
+    .profile-aside{position:sticky;top:0;align-self:start}
     .detail-photo{
       aspect-ratio:1/1.18;
       background:radial-gradient(circle at 50% 20%,rgba(201,169,106,.13),transparent 28%),linear-gradient(180deg,#151b24,#080b10);
@@ -757,12 +758,38 @@
       padding:18px;
     }
     .restricted-note{margin-top:12px;color:var(--muted);font-size:12px;line-height:1.6}
-    .detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:0}
-    .detail-item{background:rgba(255,255,255,.045);border:1px solid var(--line);padding:12px}
-    .detail-item small{display:block;color:var(--muted);margin-bottom:5px;font-size:11px;letter-spacing:.1em}
-    .detail-item strong{color:var(--text);font-size:14px}
+    .modal-info-pane{
+      min-height:0;
+      overflow-y:auto;
+      overflow-x:hidden;
+      padding:0 8px 4px 0;
+      scrollbar-width:thin;
+      scrollbar-color:rgba(201,169,106,.55) rgba(255,255,255,.06);
+    }
+    .modal-info-pane::-webkit-scrollbar{width:8px}
+    .modal-info-pane::-webkit-scrollbar-track{background:rgba(255,255,255,.06);border-radius:999px}
+    .modal-info-pane::-webkit-scrollbar-thumb{background:rgba(201,169,106,.55);border-radius:999px}
+    .detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:20px}
+    .detail-item{background:rgba(255,255,255,.045);border:1px solid var(--line);padding:12px;min-width:0}
+    .detail-item small{display:block;color:var(--muted);margin-bottom:5px;font-size:10px;letter-spacing:.1em}
+    .detail-item strong{display:block;color:var(--text);font-size:13px;line-height:1.55;word-break:keep-all}
+    .qa-section{margin-top:18px;border-top:1px solid rgba(201,169,106,.2);padding-top:20px}
+    .qa-section h4{margin:0 0 16px;color:var(--gold2);font-size:22px;letter-spacing:-.04em}
+    .qa-item{padding:16px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+    .qa-item:first-of-type{padding-top:0}
+    .qa-item:last-child{border-bottom:0}
+    .qa-q{margin:0 0 8px;color:#f4e3b2;font-weight:800;font-size:14px;line-height:1.65}
+    .qa-a{margin:0;color:var(--soft);font-size:14px;line-height:1.8;word-break:keep-all}
     .emblem svg{width:100%;height:100%;display:block}
 
+
+    @media(max-width:980px){
+      .modal-panel{overflow:auto;max-height:88vh}
+      .modal-content{grid-template-columns:1fr;max-height:none;overflow:visible}
+      .profile-aside{position:relative;top:auto}
+      .modal-info-pane{overflow:visible;max-height:none;padding-right:0}
+      .detail-grid{grid-template-columns:1fr}
+    }
 
     .hero-visual{
       width:min(100%, 980px);
@@ -1789,15 +1816,19 @@
         <button class="close" onclick="hideModal()">×</button>
       </div>
       <div class="modal-content">
-        <aside>
+        <aside class="profile-aside">
           <div class="detail-photo">
             <img id="detailImage" src="" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="photo-fallback"><span>이미지 준비 중</span></div>
           </div>
           <p class="restricted-note">서율 관리청 등록 인원 공식 프로필 이미지입니다.</p>
         </aside>
-        <div>
+        <div class="modal-info-pane">
           <div id="detailGrid" class="detail-grid"></div>
+          <section class="qa-section">
+            <h4>현직자에게 묻습니다</h4>
+            <div id="qaList"></div>
+          </section>
         </div>
       </div>
     </div>
@@ -1921,7 +1952,7 @@
             "name": "케빈 클로우 / 도규진",
             "image": "do.png",
             "details": {
-                  "영문명": "Kevin Clow / Do Gyujin",
+                  "영문명": "Kevin Claw / Do Gyujin",
                   "나이": "32",
                   "키": "198cm",
                   "소속": "서율 관리청 / 센티넬 관리국",
@@ -1975,6 +2006,72 @@
       }
 };
 
+    const qaByPerson={
+      "선우현": [
+        ["서율 관리청의 급여 수준은 어떤가요?", "직무 위험도와 호출 빈도를 고려하면 낮지는 않습니다. 보고서 양까지 고려하면 판단이 달라질 수 있습니다."],
+        ["위험수당은 실제로 지급되나요?", "지급됩니다. 다만 위험수당을 받을 일이 없도록 행동하는 편이 더 바람직합니다."],
+        ["서율 관리청 소속 인원은 총기를 소지할 수 있나요?", "가능합니다. 다만 소지 가능과 발포 가능은 다른 문제입니다. 발포하면 한 발당 보고서가 붙습니다. 농담 아닙니다."],
+        ["결혼 여부가 근무 배정에 영향을 주나요?", "공식적으로는 없습니다. 비공식적으로는, 가족에게 퇴근 시간을 설명할 자신이 있는지부터 생각해보는 편이 좋습니다."],
+        ["입청 전 가장 먼저 익혀야 할 것은 무엇인가요?", "태블릿 확인, 보고 체계, 그리고 이름을 정확히 부르는 법입니다. 선 우현이 아니라 선우 현입니다. 이 부분은 생각보다 자주 틀립니다."]
+      ],
+      "윤서하": [
+        ["서율 관리청의 급여는 만족스러운 편인가요?", "업무 강도를 생각하면 더 받아야 한다고 생각합니다. 이건 불만이 아니라 객관적인 판단입니다."],
+        ["긴급 호출은 자주 있나요?", "자주 없습니다. 아주 자주 있습니다. 방금 말은 취소해 주세요."],
+        ["센티넬도 총기를 사용하나요?", "사용은 합니다. 다만 능력으로 해결할 수 있는 상황에서 굳이 발포하면 보고서가 늘어납니다. 능력은 오염도가 오르고, 총은 보고서가 옵니다. 둘 다 별로입니다."],
+        ["결혼 여부가 근무에 영향을 주나요?", "왜 그걸 저한테 묻습니까. 인사팀에 물어보세요. 저는 괜찮습니다."],
+        ["신입에게 해주고 싶은 말이 있나요?", "괜찮아 보이는 사람을 믿지 마세요. 특히 괜찮다고 말하는 사람을요."]
+      ],
+      "노아": [
+        ["서율 관리청은 안전한 직장인가요?", "아닙니다. 그래도 통제는 됩니다."],
+        ["급여나 복지는 어떤가요?", "필요 물품은 지급됩니다. 식사도 나옵니다. 저는 그 정도면 충분하다고 배웠습니다."],
+        ["총기 사용 규정은 어렵나요?", "어렵지는 않습니다. 쏘면 기록이 남고, 기록이 남으면 설명해야 합니다. 그래서 대부분은 쏘기 전에 한 번 더 생각합니다."],
+        ["결혼 여부가 배정에 영향을 주나요?", "모르겠습니다. 저는 그런 질문을 받은 적이 없습니다. 왜 필요한 질문입니까?"],
+        ["입청 전 준비해야 할 것은 무엇인가요?", "가까이 오면 위험한 사람도 있다는 걸 알아두면 됩니다. 싫다는 뜻은 아닙니다."]
+      ],
+      "여우염": [
+        ["서율 관리청의 급여는 어떤가요?", "위험한 만큼 줘. 충분하냐고 물으면 그건 또 다른 얘기고."],
+        ["제복은 실제 근무에도 편한가요?", "편해. 불편했으면 내가 모델 안 했지."],
+        ["총기 사용 규정은 까다로운 편인가요?", "까다로워. 쐈으면 왜 쐈는지 써야 해. 한 발 쏘면 한 줄이 아니라 한 건이야. 귀찮지."],
+        ["결혼 여부가 근무 배정에 영향을 주나요?", "그걸 왜 여기서 물어봐? 결혼했으면 게이트가 피해 가?"],
+        ["신입에게 조언한다면요?", "태블릿 봐. 사람 얼굴 보고 괜찮은지 판단하지 말고. 특히 괜찮은 척하는 얼굴."]
+      ],
+      "강강범": [
+        ["가이드 운영실의 근무 강도는 어떤가요?", "평균적으로는 관리 가능한 수준입니다. 물론 평균이라는 건 사람을 안심시키기 위해 존재하는 아주 무서운 단어죠."],
+        ["급여는 만족스러운가요?", "위험수당, 야간수당, 긴급 호출 수당을 다 합치면 나쁘지 않습니다. 문제는 그걸 다 받는다는 건 그만큼 불려 나갔다는 뜻이라서요."],
+        ["발포 기록도 태블릿에 남나요?", "남습니다! 시간, 위치, 발포자, 현장 상황, 사후 조치까지 기록됩니다. 이론상 아주 아름다운 데이터예요. 당사자 입장에서는 안 아름답겠지만요."],
+        ["결혼 여부가 배정에 영향을 주나요?", "공식적으로는 없습니다! 비공식적으로도 없어야 하고요! 그런데 현장 호출 중에 배우자분이 전화하시면 분위기가 아주… 네, 자료가 있습니다."],
+        ["이름을 어떻게 부르면 되나요?", "성이 강! 이름은 강범입니다. 강간범 아니고, 강, 강범이에요. 이건 Q&A에 꼭 넣어주세요."]
+      ],
+      "케빈 클로우 / 도규진": [
+        ["서율 관리청의 급여 수준은 어떤가요?", "Good. 좋아. 위험한 일 치고는 정직하게 줍니다. 아주 정직하게 위험하고요."],
+        ["S+급 센티넬의 근무는 많이 다른가요?", "조금 다릅니다. 사람들이 나를 전력이라고 부르고, 가끔은 문제라고도 부릅니다. 둘 다 맞습니다."],
+        ["총기를 자주 사용하나요?", "총은 좋은 도구입니다. 하지만 내가 앞에 서는 게 더 빠를 때도 있습니다. 보고서는 둘 다 필요하고요. 슬픈 부분입니다."],
+        ["결혼 여부가 근무 배정에 영향을 주나요?", "Interesting question. 흥미로운 질문이네요. 결혼하면 누가 더 위험해집니까? 배우자? 나? 아니면 인사팀?"],
+        ["한국어가 어려운가요?", "어려운 척하는 건 쉽습니다. 진짜 어려운 건 보고서입니다."]
+      ],
+      "주인하": [
+        ["서율 관리청의 근무 환경은 어떤가요?", "게이트 열리고, 호출 오고, 보고서 쓰고, 또 게이트 열려. 환경 설명 끝."],
+        ["급여는 괜찮은 편인가요?", "일한 만큼은 줘. 문제는 일을 많이 하게 된다는 거지."],
+        ["총기 사용은 자주 하나요?", "상황 따라. 근데 쏘면 보고서 써야 하고, 능력 쓰면 오염도 올라. 결국 뭘 해도 귀찮아."],
+        ["결혼 여부가 배정에 영향을 주나요?", "그 질문 만든 사람 누구야. 결혼했든 안 했든 게이트 앞에서는 똑같이 뛰어야지."],
+        ["신입이 가장 많이 하는 실수는 뭔가요?", "이름 이상하게 부르는 거. 주인하씨라고 하지 마. 주인 아씨 같잖아."]
+      ],
+      "비비안": [
+        ["서율 관리청의 분위기는 어떤가요?", "시끄럽고 위험하고 바쁘지. 그래도 내 사람 챙기는 분위기는 있어."],
+        ["급여나 수당은 괜찮나요?", "위험수당은 나와. 많이 받으면 좋은 건데, 많이 받을 일이 생겼다는 뜻이라 좀 애매해."],
+        ["가이드도 총기를 소지하나요?", "소지는 가능해. 근데 가이드가 총 꺼냈다는 건 보통 상황이 이미 예쁘게 망했다는 뜻이지."],
+        ["결혼 여부가 근무에 영향을 주나요?", "결혼했다고 덜 다치나? 안 다치는 쪽으로 배정해주면 좋겠지만, 게이트가 그런 배려를 하진 않더라."],
+        ["이름은 어떻게 부르면 되나요?", "비안. 비 센티넬도 괜찮아. 비비안은 하지 말고. 그건 진짜 좀 그래."]
+      ],
+      "최성우": [
+        ["가이드 운영실의 업무 강도는 어떤가요?", "친절하게 말하면 유동적입니다. 솔직하게 말하면 퇴근이 유동적입니다."],
+        ["급여는 만족스러운가요?", "숫자만 보면 괜찮습니다. 그 숫자를 받기까지의 과정을 보면 조금 울고 싶고요."],
+        ["가이드도 총기를 사용할 일이 있나요?", "많으면 안 됩니다. 많아졌다면 그날 회의 제목이 바뀝니다. 사고 경위 보고 같은 걸로요."],
+        ["결혼 여부가 근무 배정에 영향을 주나요?", "공식적으로는 없습니다. 다만 결혼기념일에 긴급 호출이 뜨면 그날부터 가정 내 등급이 하향 조정될 수는 있겠죠."],
+        ["서율 관리청을 한마디로 표현하면요?", "월급은 들어옵니다. 퇴근은 가끔 안 들어옵니다."]
+      ]
+    };
+
     function personRole(p){
       return `${p.details["등급"]} ${p.details["직군"]}`;
     }
@@ -2006,6 +2103,19 @@
       }).join("");
     }
 
+    function profileSummaryItems(p){
+      const placeLabel=p.details["담당"] ? "담당" : "소속팀";
+      const placeValue=p.details["담당"] || p.details["소속팀"] || "-";
+      return [
+        ["영문명", p.details["영문명"]],
+        ["나이 / 키", `${p.details["나이"]} / ${p.details["키"]}`],
+        ["소속", p.details["소속"].replace("서율 관리청 / ", "")],
+        [placeLabel, placeValue],
+        ["직군 / 등급", `${p.details["직군"]} / ${p.details["등급"]}`],
+        ["능력", p.details["능력"]]
+      ];
+    }
+
     function showPerson(name){
       const p=people[name];
       document.getElementById("modalName").textContent=p.name;
@@ -2016,9 +2126,18 @@
       fallback.style.display="none";
       detailImage.src=p.image;
       detailImage.alt=`${p.name} 공식 프로필`;
-      document.getElementById("detailGrid").innerHTML=Object.entries(p.details).map(([key,value])=>`
+      document.getElementById("detailGrid").innerHTML=profileSummaryItems(p).map(([key,value])=>`
         <div class="detail-item"><small>${key}</small><strong>${value}</strong></div>
       `).join("");
+      const qa=qaByPerson[name] || [];
+      document.getElementById("qaList").innerHTML=qa.map(([q,a])=>`
+        <div class="qa-item">
+          <p class="qa-q">Q. ${q}</p>
+          <p class="qa-a">A. ${a}</p>
+        </div>
+      `).join("");
+      const pane=document.querySelector(".modal-info-pane");
+      if(pane) pane.scrollTop=0;
       document.getElementById("modal").classList.add("active");
       document.body.style.overflow="hidden";
     }
