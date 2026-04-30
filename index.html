@@ -38,7 +38,9 @@
       max-width:1180px;margin:0 auto;padding:18px 22px;
       display:flex;align-items:center;justify-content:space-between;gap:18px;
     }
-    .brand{display:flex;align-items:center;gap:14px;cursor:pointer;min-width:240px}
+    .brand{display:flex;align-items:center;gap:14px;cursor:pointer;min-width:240px;text-decoration:none;color:inherit}
+    .brand-logo{width:46px;height:46px;object-fit:contain;filter:drop-shadow(0 0 14px rgba(201,169,106,.24));transition:.22s ease}
+    .brand:hover .brand-logo{transform:scale(1.05);filter:drop-shadow(0 0 22px rgba(201,169,106,.38))}
     .brand-text strong{display:block;font-size:17px;letter-spacing:-.02em}
     .brand-text span{display:block;margin-top:3px;color:var(--gold);font-size:11px;letter-spacing:.1em}
     .nav{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
@@ -68,6 +70,7 @@
       filter:drop-shadow(0 0 22px rgba(201,169,106,.2));transition:.24s ease;
     }
     .hero-logo:hover{transform:translateY(-3px) scale(1.03);filter:drop-shadow(0 0 32px rgba(201,169,106,.35))}
+    .hero-logo img{width:100%;height:100%;object-fit:contain}
     .subtitle{color:var(--gold2);font-size:clamp(20px,3vw,30px);margin:0;letter-spacing:-.04em;font-weight:600}
     .hero-desc{max-width:720px;margin:26px auto 0;color:var(--soft);line-height:1.85;font-size:16px}
     .notice{
@@ -170,11 +173,23 @@
     .uniform-card{padding:0;overflow:hidden}
     .uniform-image{
       aspect-ratio:4/5;
-      background:#0b0f15;
+      min-height:420px;
+      background:
+        radial-gradient(circle at 50% 24%,rgba(201,169,106,.08),transparent 36%),
+        #0b0f15;
       border-bottom:1px solid var(--line);
       display:flex;align-items:center;justify-content:center;overflow:hidden;
+      cursor:zoom-in;
     }
-    .uniform-image img{width:100%;height:100%;object-fit:cover}
+    .uniform-image img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:center center;
+      padding:14px;
+      transition:transform .22s ease, filter .22s ease;
+    }
+    .uniform-image:hover img{transform:scale(1.015);filter:drop-shadow(0 18px 34px rgba(0,0,0,.42))}
     .uniform-body{padding:24px}
     .uniform-body h3{margin:0 0 10px;color:var(--gold2);font-size:22px}
     .uniform-body p{margin:0;color:var(--soft);line-height:1.8;font-size:14px}
@@ -201,6 +216,26 @@
       object-fit:contain;
       filter:drop-shadow(0 14px 28px rgba(0,0,0,.35));
     }
+    .mark-home-button{
+      width:100%;
+      min-height:190px;
+      border:0;
+      background:transparent;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      padding:0;
+    }
+    .mark-home-button img{
+      max-height:190px;
+      width:auto;
+      max-width:100%;
+      object-fit:contain;
+      filter:drop-shadow(0 18px 34px rgba(0,0,0,.45));
+      transition:.22s ease;
+    }
+    .mark-home-button:hover img{transform:translateY(-3px) scale(1.03);filter:drop-shadow(0 0 28px rgba(201,169,106,.28))}
     .mark-caption{margin-top:10px;color:var(--muted);font-size:12px;text-align:center;letter-spacing:.04em}
 
     .tablet-grid{
@@ -624,6 +659,51 @@
 
     .modal{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:50;display:none;align-items:center;justify-content:center;padding:24px}
     .modal.active{display:flex}
+    .image-modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.84);
+      z-index:60;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+    .image-modal.active{display:flex}
+    .image-modal-panel{
+      width:min(1180px,100%);
+      max-height:92vh;
+      background:#080b10;
+      border:1px solid rgba(201,169,106,.28);
+      box-shadow:var(--shadow);
+      display:flex;
+      flex-direction:column;
+    }
+    .image-modal-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      padding:16px 18px;
+      border-bottom:1px solid var(--line);
+      background:rgba(12,15,22,.96);
+    }
+    .image-modal-top h3{margin:0;font-size:20px;letter-spacing:-.04em;color:var(--gold2)}
+    .image-modal-content{
+      padding:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:0;
+    }
+    .image-modal-content img{
+      max-width:100%;
+      max-height:78vh;
+      width:auto;
+      height:auto;
+      object-fit:contain;
+      filter:drop-shadow(0 24px 60px rgba(0,0,0,.55));
+    }
     .modal-panel{width:min(960px,100%);max-height:88vh;overflow:auto;background:#0d1118;border:1px solid rgba(201,169,106,.22);box-shadow:var(--shadow)}
     .modal-top{display:flex;justify-content:space-between;gap:18px;padding:22px;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(13,17,24,.95);backdrop-filter:blur(10px);z-index:2}
     .modal-top h3{margin:0;font-size:28px;letter-spacing:-.05em}
@@ -687,6 +767,10 @@
       .section-head{display:block}
       .section-head p{margin-top:12px}
       .hero-logo{width:92px;height:92px}
+      .uniform-image{min-height:360px;aspect-ratio:3/4}
+      .image-modal{padding:10px}
+      .image-modal-content{padding:10px}
+      .image-modal-content img{max-height:82vh}
       .brand{min-width:0}
       h1{font-size:52px}
       .pad-status-strip,.detail-grid,.book-commands{grid-template-columns:1fr}
@@ -768,15 +852,8 @@
   <div class="page">
     <header class="topbar">
       <div class="topbar-inner">
-        <div class="brand" onclick="goHome()" role="button" tabindex="0">
-          <div class="emblem" style="width:46px;height:46px" aria-label="서율 관리청 엠블럼">
-            <svg viewBox="0 0 100 100" fill="none">
-              <path d="M28 14H72L92 50L72 86H28L8 50L28 14Z" stroke="#c9a96a" stroke-width="2"/>
-              <path d="M43 24V76M57 24V76" stroke="#e8edf5" stroke-width="2" stroke-linecap="round"/>
-              <path d="M24 50H76" stroke="#c9a96a" stroke-width="2" stroke-linecap="round"/>
-              <path d="M34 34L43 24M66 34L57 24M34 66L43 76M66 66L57 76" stroke="#6b8fb8" stroke-width="1.4" stroke-linecap="round"/>
-            </svg>
-          </div>
+        <div class="brand" onclick="goHome()" role="button" tabindex="0" aria-label="홈으로 이동">
+          <img class="brand-logo" src="seoyul-bureau-emblem.png" alt="서율 관리청 공통 엠블럼">
           <div class="brand-text">
             <strong>서율 관리청</strong>
             <span>게이트 현장 통합 안내 포털</span>
@@ -800,13 +877,8 @@
             <img src="sentinel.png" alt="서율 관리청 외관">
           </div>
           <h1>서율 관리청</h1>
-          <div class="hero-logo emblem" onclick="goHome()" role="button" tabindex="0" aria-label="홈으로 이동">
-            <svg viewBox="0 0 100 100" fill="none">
-              <path d="M28 14H72L92 50L72 86H28L8 50L28 14Z" stroke="#c9a96a" stroke-width="2"/>
-              <path d="M43 24V76M57 24V76" stroke="#e8edf5" stroke-width="2" stroke-linecap="round"/>
-              <path d="M24 50H76" stroke="#c9a96a" stroke-width="2" stroke-linecap="round"/>
-              <path d="M34 34L43 24M66 34L57 24M34 66L43 76M66 66L57 76" stroke="#6b8fb8" stroke-width="1.4" stroke-linecap="round"/>
-            </svg>
+          <div class="hero-logo" onclick="goHome()" role="button" tabindex="0" aria-label="홈으로 이동">
+            <img src="seoyul-bureau-emblem.png" alt="서율 관리청 공통 엠블럼">
           </div>
           <p class="subtitle">게이트 현장 통합 안내 포털</p>
           <p class="hero-desc">
@@ -922,14 +994,14 @@
 
           <div class="uniform-grid">
             <article class="uniform-card card">
-              <div class="uniform-image"><img src="sentinel-uniform.png" alt="센티넬 제복"></div>
+              <div class="uniform-image" onclick="openImageModal('sentinel-uniform.png', '센티넬 제복')" role="button" tabindex="0" aria-label="센티넬 제복 크게 보기"><img src="sentinel-uniform.png" alt="센티넬 제복"></div>
               <div class="uniform-body">
                 <h3>센티넬 제복</h3>
                 <p>블랙, 블랙 네이비, 차콜 블랙을 중심으로 하며 건메탈, 실버, 절제된 골드가 보조색으로 사용됩니다. 전투 인력의 권한과 압박감을 드러냅니다.</p>
               </div>
             </article>
             <article class="uniform-card card">
-              <div class="uniform-image"><img src="guide-uniform.png" alt="가이드 제복"></div>
+              <div class="uniform-image" onclick="openImageModal('guide-uniform.png', '가이드 제복')" role="button" tabindex="0" aria-label="가이드 제복 크게 보기"><img src="guide-uniform.png" alt="가이드 제복"></div>
               <div class="uniform-body">
                 <h3>가이드 제복</h3>
                 <p>화이트, 아이보리 화이트, 쿨 화이트를 중심으로 합니다. 치료복이 아니라 센티넬의 폭주를 통제하는 공식 인력의 제복입니다.</p>
@@ -942,16 +1014,14 @@
               <article class="mark-card card">
                 <h3>공통 마크</h3>
                 <div class="mark-image-wrap">
-                  <div>
-                    <div class="mark-image"><img src="seoyul-guide-emblem.jpg" alt="서율 관리청 가이드용 엠블럼"></div>
-                    <div class="mark-caption">서율 관리청 가이드용 엠블럼</div>
-                  </div>
-                  <div>
-                    <div class="mark-image"><img src="seoyul-sentinel-emblem.jpg" alt="서율 관리청 센티넬용 엠블럼"></div>
-                    <div class="mark-caption">서율 관리청 센티넬용 엠블럼</div>
+                  <div class="mark-image">
+                    <button class="mark-home-button" onclick="goHome()" aria-label="서율 관리청 공통 엠블럼, 메인 화면으로 이동">
+                      <img src="seoyul-bureau-emblem.png" alt="서율 관리청 공통 엠블럼">
+                    </button>
                   </div>
                 </div>
-                <p>서율 관리청 소속 직군을 구분하는 기관 공통 계열 마크입니다. 가이드와 센티넬 모두 관리청의 공식 통제 체계 안에 있음을 나타냅니다.</p>
+                <div class="mark-caption">서율 관리청 공통 엠블럼 · 클릭 시 메인 화면으로 이동</div>
+                <p>서율 관리청의 통합 기관 마크입니다. 가이드와 센티넬을 모두 관리하는 상위 기관의 공식 인장으로 사용됩니다.</p>
               </article>
 
               <article class="mark-card card">
@@ -1200,6 +1270,18 @@
     </div>
   </div>
 
+  <div id="imageModal" class="image-modal" onclick="closeImageModal(event)">
+    <div class="image-modal-panel" onclick="event.stopPropagation()">
+      <div class="image-modal-top">
+        <h3 id="imageModalTitle">이미지</h3>
+        <button class="close" onclick="hideImageModal()" aria-label="닫기">×</button>
+      </div>
+      <div class="image-modal-content">
+        <img id="imageModalImg" src="" alt="">
+      </div>
+    </div>
+  </div>
+
   <script>
     const groups=[
       {
@@ -1407,20 +1489,43 @@
       document.getElementById("modal").classList.add("active");
       document.body.style.overflow="hidden";
     }
+    function isAnyOverlayActive(){
+      return ["modal","guideBookModal","imageModal"].some(id=>document.getElementById(id)?.classList.contains("active"));
+    }
+    function unlockBodyIfClear(){
+      if(!isAnyOverlayActive()) document.body.style.overflow="";
+    }
     function openGuideBook(){
       document.getElementById("guideBookModal").classList.add("active");
       document.body.style.overflow="hidden";
     }
     function hideGuideBook(){
       document.getElementById("guideBookModal").classList.remove("active");
-      if(!document.getElementById("modal").classList.contains("active")){
-        document.body.style.overflow="";
-      }
+      unlockBodyIfClear();
     }
     function closeGuideBook(event){
       if(event.target.id==="guideBookModal") hideGuideBook();
     }
-    function hideModal(){document.getElementById("modal").classList.remove("active");document.body.style.overflow=""}
+    function openImageModal(src,title){
+      const img=document.getElementById("imageModalImg");
+      document.getElementById("imageModalTitle").textContent=title;
+      img.src=src;
+      img.alt=title;
+      document.getElementById("imageModal").classList.add("active");
+      document.body.style.overflow="hidden";
+    }
+    function hideImageModal(){
+      document.getElementById("imageModal").classList.remove("active");
+      document.getElementById("imageModalImg").src="";
+      unlockBodyIfClear();
+    }
+    function closeImageModal(event){
+      if(event.target.id==="imageModal") hideImageModal();
+    }
+    function hideModal(){
+      document.getElementById("modal").classList.remove("active");
+      unlockBodyIfClear();
+    }
     function closeModal(event){if(event.target.id==="modal")hideModal()}
     function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:"smooth",block:"start"});setActiveNav(id)}
     function goHome(){scrollToSection("home")}
@@ -1436,6 +1541,11 @@
       if(e.key==="Escape"){
         hideModal();
         hideGuideBook();
+        hideImageModal();
+      }
+      if((e.key==="Enter" || e.key===" ") && e.target.classList?.contains("uniform-image")){
+        e.preventDefault();
+        e.target.click();
       }
     });
     renderPeople();
