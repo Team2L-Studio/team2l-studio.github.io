@@ -874,6 +874,331 @@
       .book-commands div{padding:10px 8px;font-size:13px;}
     }
 
+
+    /* 2126 제복 캠페인 / 표식 섹션 */
+    .uniform-issue{
+      position:relative;
+      overflow:hidden;
+      padding:34px;
+      margin-bottom:18px;
+      background:
+        radial-gradient(circle at 82% 12%,rgba(201,169,106,.16),transparent 30%),
+        linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.025));
+    }
+    .uniform-issue:after{
+      content:"";
+      position:absolute;
+      width:280px;
+      height:280px;
+      right:-80px;
+      bottom:-110px;
+      border:1px solid rgba(201,169,106,.18);
+      transform:rotate(45deg);
+      pointer-events:none;
+    }
+    .issue-label{
+      color:var(--gold);
+      letter-spacing:.28em;
+      font-size:11px;
+      font-weight:800;
+      margin:0 0 12px;
+    }
+    .issue-copy{
+      position:relative;
+      z-index:2;
+      max-width:900px;
+    }
+    .issue-copy h3{
+      margin:0 0 18px;
+      color:var(--gold2);
+      font-size:clamp(28px,4vw,42px);
+      letter-spacing:-.07em;
+    }
+    .issue-copy p{
+      margin:0 0 14px;
+      color:var(--soft);
+      line-height:1.85;
+      font-size:15px;
+    }
+    .issue-caption{
+      margin-top:22px!important;
+      padding-top:16px;
+      border-top:1px solid rgba(201,169,106,.18);
+      color:var(--gold2)!important;
+      font-size:14px!important;
+    }
+
+    .uniform-models{
+      padding:26px;
+      margin-bottom:18px;
+    }
+    .model-tabs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:22px;
+    }
+    .uniform-model-tab{
+      border:1px solid rgba(201,169,106,.22);
+      background:rgba(255,255,255,.04);
+      color:var(--muted);
+      padding:11px 18px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:800;
+      transition:.2s ease;
+    }
+    .uniform-model-tab:hover,
+    .uniform-model-tab.active{
+      color:var(--gold2);
+      border-color:rgba(201,169,106,.58);
+      background:rgba(201,169,106,.12);
+      transform:translateY(-1px);
+    }
+    .uniform-model-panel{
+      display:none;
+      grid-template-columns:minmax(280px,42%) 1fr;
+      gap:24px;
+      align-items:stretch;
+    }
+    .uniform-model-panel.active{
+      display:grid;
+    }
+    .model-portrait-card{
+      min-height:470px;
+      border:1px solid rgba(142,167,200,.18);
+      background:
+        radial-gradient(circle at 50% 20%,rgba(201,169,106,.12),transparent 34%),
+        linear-gradient(180deg,#121a26,#070a10);
+      overflow:hidden;
+      cursor:zoom-in;
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .model-portrait-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center top;
+      transition:transform .22s ease, filter .22s ease;
+    }
+    .model-portrait-card:hover img{
+      transform:scale(1.018);
+      filter:drop-shadow(0 18px 34px rgba(0,0,0,.42));
+    }
+    .model-image-fallback{
+      position:absolute;
+      inset:0;
+      display:none;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      text-align:center;
+      color:var(--muted);
+      padding:28px;
+      background:
+        radial-gradient(circle at 50% 30%,rgba(201,169,106,.10),transparent 45%),
+        linear-gradient(180deg,#141b25,#080b10);
+    }
+    .model-image-fallback:before{
+      content:"";
+      width:62%;
+      aspect-ratio:1/1;
+      position:absolute;
+      border:1px solid rgba(201,169,106,.16);
+      transform:rotate(45deg);
+    }
+    .model-image-fallback span,
+    .model-image-fallback small{
+      position:relative;
+      z-index:2;
+    }
+    .model-image-fallback span{
+      color:var(--soft);
+      font-weight:800;
+      letter-spacing:-.02em;
+    }
+    .model-image-fallback small{
+      color:var(--gold);
+      letter-spacing:.08em;
+      font-size:11px;
+    }
+
+    .model-interview-card{
+      background:
+        linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.025)),
+        rgba(0,0,0,.18);
+      border:1px solid rgba(255,255,255,.08);
+      padding:30px;
+    }
+    .model-role{
+      margin:0 0 8px;
+      color:var(--gold);
+      font-size:13px;
+      font-weight:900;
+      letter-spacing:.04em;
+    }
+    .model-interview-card h3{
+      margin:0;
+      color:#fff;
+      font-size:34px;
+      letter-spacing:-.07em;
+    }
+    .model-subtitle{
+      margin:8px 0 24px;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .interview-list{
+      display:grid;
+      gap:16px;
+    }
+    .interview-item{
+      padding:0 0 16px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .interview-item:last-child{
+      padding-bottom:0;
+      border-bottom:0;
+    }
+    .interview-item strong{
+      display:block;
+      color:var(--gold2);
+      font-size:14px;
+      line-height:1.65;
+      margin-bottom:6px;
+    }
+    .interview-item p{
+      margin:0;
+      color:var(--soft);
+      line-height:1.75;
+      font-size:15px;
+    }
+
+    .uniform-standard-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:16px;
+      margin-bottom:22px;
+    }
+    .uniform-standard-card{
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:42% 1fr;
+      min-height:240px;
+    }
+    .uniform-standard-thumb{
+      background:
+        radial-gradient(circle at 50% 24%,rgba(201,169,106,.08),transparent 42%),
+        #0b0f15;
+      border-right:1px solid rgba(255,255,255,.08);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:zoom-in;
+      overflow:hidden;
+      padding:14px;
+    }
+    .uniform-standard-thumb img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      transition:transform .22s ease, filter .22s ease;
+    }
+    .uniform-standard-thumb:hover img{
+      transform:scale(1.02);
+      filter:drop-shadow(0 18px 34px rgba(0,0,0,.42));
+    }
+    .uniform-standard-body{
+      padding:24px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    .uniform-standard-body h3{
+      margin:0 0 10px;
+      color:var(--gold2);
+      font-size:22px;
+    }
+    .uniform-standard-body p{
+      margin:0;
+      color:var(--soft);
+      line-height:1.8;
+      font-size:14px;
+    }
+
+    .symbol-section-card{
+      padding:26px;
+      margin-bottom:16px;
+    }
+    .symbol-section-card h3{
+      margin:0 0 12px;
+      color:var(--gold2);
+      font-size:24px;
+      letter-spacing:-.04em;
+    }
+    .symbol-section-card p{
+      margin:0;
+      color:var(--soft);
+      line-height:1.75;
+      font-size:14px;
+    }
+    .mark-grid-three,
+    .mark-grid-two{
+      display:grid;
+      gap:16px;
+      margin-top:18px;
+    }
+    .mark-grid-three{
+      grid-template-columns:repeat(3,1fr);
+    }
+    .mark-grid-two{
+      grid-template-columns:repeat(2,1fr);
+    }
+    .mark-grid-two .mark-card{
+      margin-top:0;
+    }
+    .mark-grid-three .mark-card,
+    .mark-grid-two .mark-card{
+      padding:22px;
+    }
+
+    @media(max-width:980px){
+      .uniform-model-panel.active,
+      .uniform-standard-grid,
+      .uniform-standard-card,
+      .mark-grid-three,
+      .mark-grid-two{
+        grid-template-columns:1fr;
+      }
+      .uniform-standard-thumb{
+        min-height:260px;
+        border-right:0;
+        border-bottom:1px solid rgba(255,255,255,.08);
+      }
+      .model-portrait-card{
+        min-height:420px;
+      }
+    }
+    @media(max-width:620px){
+      .uniform-issue,
+      .uniform-models,
+      .model-interview-card,
+      .symbol-section-card{
+        padding:22px;
+      }
+      .model-portrait-card{
+        min-height:360px;
+      }
+      .model-interview-card h3{
+        font-size:28px;
+      }
+    }
+
+
   </style>
 </head>
 <body>
@@ -1020,54 +1345,238 @@
             <p>서율 관리청 제복과 직군 표식은 현장 인력의 권한, 통제 범위, 대응 직무를 시각적으로 구분합니다.</p>
           </div>
 
-          <div class="uniform-grid">
-            <article class="uniform-card card">
-              <div class="uniform-image" onclick="openImageModal('sentinel-uniform.png', '센티넬 제복')" role="button" tabindex="0" aria-label="센티넬 제복 크게 보기"><img src="sentinel-uniform.png" alt="센티넬 제복"></div>
-              <div class="uniform-body">
+          <article class="uniform-issue card">
+            <div class="issue-copy">
+              <p class="issue-label">UNIFORM ISSUE 2126</p>
+              <h3>서율 관리청 공식 제복 캠페인</h3>
+              <p>
+                서율 관리청의 제복은 단순한 근무복이 아닙니다. 게이트 현장에서 소속을 식별하고,
+                직군의 권한을 드러내며, 위기 상황에서 가장 먼저 눈에 들어오는 공식 표식입니다.
+              </p>
+              <p>
+                센티넬 제복은 기동성과 현장 압박감을 중심으로, 가이드 제복은 안정감과 통제력을 중심으로 설계되었습니다.
+                2126년 개정 제복 캠페인은 실제 현장 인력과 외부 캠페인 모델의 이미지를 함께 사용해 공개되었습니다.
+              </p>
+              <p class="issue-caption">
+                센티넬 제복 · (좌) 게이트 진압 1팀 센티넬 여우염 · (우) 2126 센티넬 제복 캠페인 모델 이성현<br>
+                가이드 제복 · (좌) 게이트 진압 1팀 센티넬 여우염 · (우) 2126 가이드 제복 캠페인 모델 캐서린 로즈
+              </p>
+            </div>
+          </article>
+
+          <div class="uniform-standard-grid">
+            <article class="uniform-standard-card card">
+              <div class="uniform-standard-thumb" onclick="openImageModal('sentinel-uniform.png', '센티넬 제복')" role="button" tabindex="0" aria-label="센티넬 제복 크게 보기">
+                <img src="sentinel-uniform.png" alt="센티넬 제복">
+              </div>
+              <div class="uniform-standard-body">
                 <h3>센티넬 제복</h3>
-                <p>블랙, 블랙 네이비, 차콜 블랙을 중심으로 하며 건메탈, 실버, 절제된 골드가 보조색으로 사용됩니다. 전투 인력의 권한과 압박감을 드러냅니다.</p>
+                <p>
+                  블랙, 블랙 네이비, 차콜 블랙을 중심으로 하며 건메탈, 실버, 절제된 골드가 보조색으로 사용됩니다.
+                  전투 인력의 권한과 압박감을 드러내는 현장 제복입니다.
+                </p>
+                <p class="issue-caption">
+                  (좌) 게이트 진압 1팀 센티넬 여우염 · (우) 2126 센티넬 제복 캠페인 모델 이성현
+                </p>
               </div>
             </article>
-            <article class="uniform-card card">
-              <div class="uniform-image" onclick="openImageModal('guide-uniform.png', '가이드 제복')" role="button" tabindex="0" aria-label="가이드 제복 크게 보기"><img src="guide-uniform.png" alt="가이드 제복"></div>
-              <div class="uniform-body">
+
+            <article class="uniform-standard-card card">
+              <div class="uniform-standard-thumb" onclick="openImageModal('guide-uniform.png', '가이드 제복')" role="button" tabindex="0" aria-label="가이드 제복 크게 보기">
+                <img src="guide-uniform.png" alt="가이드 제복">
+              </div>
+              <div class="uniform-standard-body">
                 <h3>가이드 제복</h3>
-                <p>화이트, 아이보리 화이트, 쿨 화이트를 중심으로 합니다. 치료복이 아니라 센티넬의 폭주를 통제하는 공식 인력의 제복입니다.</p>
+                <p>
+                  화이트, 아이보리 화이트, 쿨 화이트를 중심으로 합니다.
+                  치료복이 아니라 센티넬의 폭주를 통제하는 공식 인력의 제복입니다.
+                </p>
+                <p class="issue-caption">
+                  (좌) 게이트 진압 1팀 센티넬 여우염 · (우) 2126 가이드 제복 캠페인 모델 캐서린 로즈
+                </p>
               </div>
             </article>
           </div>
 
-          <div class="mark-section">
-            <article class="mark-main-card card">
-              <h3>공동 마크</h3>
-              <div class="mark-main-image-wrap">
-                <img src="seoyul-bureau-emblem.png" alt="서율 관리청 공통 엠블럼">
+          <section class="uniform-models card">
+            <div class="model-tabs" aria-label="제복 모델 인터뷰 선택">
+              <button class="uniform-model-tab active" type="button" data-uniform-model="yeo" onclick="showUniformModel('yeo')">여우염</button>
+              <button class="uniform-model-tab" type="button" data-uniform-model="seonghyeon" onclick="showUniformModel('seonghyeon')">이성현</button>
+              <button class="uniform-model-tab" type="button" data-uniform-model="catherine" onclick="showUniformModel('catherine')">캐서린 로즈</button>
+            </div>
+
+            <div class="uniform-model-panel active" id="uniform-model-yeo">
+              <div class="model-portrait-card" onclick="openImageModal('yeo-uyeom-uniform.png', '여우염 센티넬 제복 모델')" role="button" tabindex="0" aria-label="여우염 제복 모델 이미지 크게 보기">
+                <img src="yeo-uyeom-uniform.png" alt="여우염 센티넬 제복 모델" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="model-image-fallback">
+                  <span>여우염 제복 모델 이미지 준비 중</span>
+                  <small>yeo-uyeom-uniform.png</small>
+                </div>
               </div>
-              <div class="mark-caption">서율 관리청 공통 엠블럼</div>
-              <p>서율 관리청의 통합 기관 마크입니다. 가이드와 센티넬을 모두 관리하는 상위 기관의 공식 인장으로 사용됩니다.</p>
+              <div class="model-interview-card">
+                <p class="model-role">게이트 진압 1팀 / A급 센티넬</p>
+                <h3>여우염</h3>
+                <p class="model-subtitle">2126 서율 관리청 센티넬 제복 모델</p>
+
+                <div class="interview-list">
+                  <div class="interview-item">
+                    <strong>Q. 이번 2126년형 센티넬 제복은 현장 기동성을 강조했다고 들었습니다. 실제로 입어본 입장에서는 어떤가요?</strong>
+                    <p>뛰기 편해. 팔 올려도 안 걸리고, 허리 돌아가고, 발목도 안 잡아. 그럼 됐지.</p>
+                  </div>
+                  <div class="interview-item">
+                    <strong>Q. 디자인 면에서는 검은색과 절제된 금속 장식이 강한 인상을 줍니다. 본인에게 잘 맞는다고 생각했나요?</strong>
+                    <p>응. 잘 어울렸으니까 찍었겠지. 안 어울렸으면 나 말고 다른 사람 세웠을 거고.</p>
+                  </div>
+                  <div class="interview-item">
+                    <strong>Q. 촬영 현장에서 포즈 요구가 많았다고 들었습니다. 어렵진 않았나요?</strong>
+                    <p>어렵진 않았어. 귀찮았지. “시선만 조금 더 차갑게 부탁드립니다”라고 하길래 그냥 평소처럼 봤어.</p>
+                  </div>
+                  <div class="interview-item">
+                    <strong>Q. 제복 모델로 공개된 뒤 내부 반응은 어땠나요?</strong>
+                    <p>사진 봤냐고 묻는 사람이 늘었어. 봤으면 봤지, 왜 나한테 보고하는지는 모르겠고.</p>
+                  </div>
+                  <div class="interview-item">
+                    <strong>Q. 센티넬 제복을 한 문장으로 설명한다면요?</strong>
+                    <p>예쁜데 쓸모없으면 장식이고, 이건 장식은 아니야. 그 정도면 칭찬이지.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="uniform-model-panel" id="uniform-model-seonghyeon">
+              <div class="model-portrait-card" onclick="openImageModal('lee-seonghyeon-uniform.png', '이성현 센티넬 제복 모델')" role="button" tabindex="0" aria-label="이성현 제복 모델 이미지 크게 보기">
+                <img src="lee-seonghyeon-uniform.png" alt="이성현 센티넬 제복 모델" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="model-image-fallback">
+                  <span>이성현 제복 모델 이미지 준비 중</span>
+                  <small>lee-seonghyeon-uniform.png</small>
+                </div>
+              </div>
+              <div class="model-interview-card">
+                <p class="model-role">세이프라인 대표</p>
+                <h3>이성현</h3>
+                <p class="model-subtitle">2126 서율 관리청 센티넬 제복 캠페인 모델</p>
+
+                <div class="interview-list">
+                  <div class="interview-item">
+                    <strong>Q. 시큐리티 대표로 알려진 이성현 씨가 서율 관리청 제복 캠페인에 참여한 건 다소 의외였습니다. 제안을 받았을 때 어떤 생각을 했나요?</strong>
+                    <p>거절할 생각이었습니다.</p>
+                  </div>
+                  <div class="interview-item">
+                    <strong>Q. 그런데 결국 참여하셨습니다. 이유가 있었나요?</strong>
+                    <p>계약 조건을 다시 봤습니다. 일정도 확인했고요. 불가능한 일은 아니었습니다.</p>
+                  </div>
+                  <div class="interview-item">
+                    <strong>Q. 센티넬 제복을 입어본 입장에서 가장 중요하게 본 부분은 무엇이었나요?</strong>
+                    <p>움직임을 방해하지 않는지. 현장에서 옷이 예쁘든 말든, 걸리적거리면 위험 요소입니다.</p>
+                  </div>
+                  <div class="interview-item">
+                    <strong>Q. 촬영 중 가장 기억에 남는 요청이 있었다면요?</strong>
+                    <p>“조금만 더 자연스럽게 웃어주세요”라는 말을 들었습니다.</p>
+                  </div>
+                  <div class="interview-item">
+                    <strong>Q. 그래서 어떻게 하셨나요?</strong>
+                    <p>안 웃었습니다.</p>
+                  </div>
+                  <div class="interview-item">
+                    <strong>Q. 제복의 인상은 어땠습니까?</strong>
+                    <p>불필요한 장식이 적었습니다. 시야에 거슬리는 부분도 많지 않았고요. 괜찮았습니다.</p>
+                  </div>
+                  <div class="interview-item">
+                    <strong>Q. “괜찮았다”는 건 좋은 평가로 받아들여도 될까요?</strong>
+                    <p>네. 제 기준에서는 꽤 높은 편입니다.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="uniform-model-panel" id="uniform-model-catherine">
+              <div class="model-portrait-card" onclick="openImageModal('catherine-rose-uniform.png', '캐서린 로즈 가이드 제복 모델')" role="button" tabindex="0" aria-label="캐서린 로즈 제복 모델 이미지 크게 보기">
+                <img src="catherine-rose-uniform.png" alt="캐서린 로즈 가이드 제복 모델" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="model-image-fallback">
+                  <span>캐서린 로즈 제복 모델 이미지 준비 중</span>
+                  <small>catherine-rose-uniform.png</small>
+                </div>
+              </div>
+              <div class="model-interview-card">
+                <p class="model-role">할리우드 배우</p>
+                <h3>캐서린 로즈</h3>
+                <p class="model-subtitle">2126 서율 관리청 가이드 제복 캠페인 모델</p>
+
+                <div class="interview-list">
+                  <div class="interview-item">
+                    <strong>Q. 서율 관리청 가이드 제복 캠페인에 참여하게 된 계기가 궁금합니다.</strong>
+                    <p>처음엔 꽤 의외의 제안이라고 생각했어요. 그런데 설명을 듣고 나니 흥미롭더군요. “누군가를 진정시키는 옷”이 아니라, “위험한 사람을 멈출 권한이 있는 옷”이라는 점이요.</p>
+                  </div>
+                  <div class="interview-item">
+                    <strong>Q. 실제로 착용했을 때 가장 먼저 눈에 들어온 부분은 무엇이었나요?</strong>
+                    <p>어깨선이요. 부드럽게 떨어지는데 약해 보이지 않아요. 사람은 어깨선이 좋으면 일단 설득력이 생깁니다. 아주 중요한 문제예요.</p>
+                  </div>
+                  <div class="interview-item">
+                    <strong>Q. 가이드 제복은 화이트와 아이보리 계열이라 자칫 의료복처럼 보일 수도 있는데요.</strong>
+                    <p>그래서 좋았어요. 언뜻 안전해 보이는데, 자세히 보면 허락 없이 가까이 가면 안 될 것 같은 옷이잖아요. 그런 모순은 카메라가 좋아합니다.</p>
+                  </div>
+                  <div class="interview-item">
+                    <strong>Q. 촬영장 분위기는 어땠나요?</strong>
+                    <p>아주 정중했어요. 모두가 제복의 의미를 설명하려고 애쓰더군요. 물론 저는 카메라 앞에서 한 번 돌면 대부분 설명이 필요 없어지는 편이지만요.</p>
+                  </div>
+                  <div class="interview-item">
+                    <strong>Q. 이번 가이드 제복을 한 문장으로 표현한다면요?</strong>
+                    <p>친절하게 웃고 있지만 문은 잠글 수 있는 옷. 꽤 마음에 들어요.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div class="mark-section">
+            <article class="symbol-section-card card">
+              <h3>공동 마크</h3>
+              <p>
+                서율 관리청에서 공통으로 사용하는 공식 표식입니다. 관리청 전체, 센티넬 관리국,
+                가이드 운영실을 나타내는 상위 기관 표식으로 사용됩니다.
+              </p>
+
+              <div class="mark-grid-three">
+                <article class="mark-card card">
+                  <div class="mark-image-wrap">
+                    <div class="mark-image"><img src="seoyul-bureau-emblem.png" alt="서율 관리청 공통 엠블럼"></div>
+                  </div>
+                  <div class="mark-caption">서율 관리청 공통 엠블럼</div>
+                </article>
+
+                <article class="mark-card card">
+                  <div class="mark-image-wrap">
+                    <div class="mark-image"><img src="seoyul-sentinel-emblem.png" alt="서율 관리청 센티넬 관리국 엠블럼"></div>
+                  </div>
+                  <div class="mark-caption">서율 관리청 센티넬 관리국 엠블럼</div>
+                </article>
+
+                <article class="mark-card card">
+                  <div class="mark-image-wrap">
+                    <div class="mark-image"><img src="seoyul-guide-emblem.png" alt="서율 관리청 가이드 운영실 엠블럼"></div>
+                  </div>
+                  <div class="mark-caption">서율 관리청 가이드 운영실 엠블럼</div>
+                </article>
+              </div>
             </article>
 
-            <div class="mark-sub-grid">
+            <div class="mark-grid-two">
               <article class="mark-card card">
                 <h3>센티넬 전용 마크</h3>
                 <div class="mark-image-wrap">
-                  <div>
-                    <div class="mark-image"><img src="sentinel-emblem.png" alt="센티넬 전용 마크"></div>
-                    <div class="mark-caption">센티넬 직군 표식</div>
-                  </div>
+                  <div class="mark-image"><img src="sentinel-emblem.png" alt="센티넬 전용 마크"></div>
                 </div>
-                <p>전투, 제압, 게이트 진입, 위험 대응을 뜻합니다. 현장 투입 인력과 고위험 전투 직군의 식별 표식으로 사용됩니다.</p>
+                <div class="mark-caption">센티넬 직군 표식</div>
+                <p>센티넬 직군을 나타내는 전용 표식입니다. 현장 투입 인력, 전투 직군, 센티넬 관련 장비와 안내 영역에 사용됩니다.</p>
               </article>
 
               <article class="mark-card card">
                 <h3>가이드 전용 마크</h3>
                 <div class="mark-image-wrap">
-                  <div>
-                    <div class="mark-image"><img src="guide-emblem.png" alt="가이드 전용 마크"></div>
-                    <div class="mark-caption">가이드 직군 표식</div>
-                  </div>
+                  <div class="mark-image"><img src="guide-emblem.png" alt="가이드 전용 마크"></div>
                 </div>
-                <p>안정 파장, 폭주 억제, 접촉 가이딩, 에너지 조율을 뜻합니다. 센티넬의 오염도 안정화와 현장 회복 절차를 담당하는 직군 표식입니다.</p>
+                <div class="mark-caption">가이드 직군 표식</div>
+                <p>가이드 직군을 나타내는 전용 표식입니다. 가이딩실, 가이드 운영실, 안정화 지원 구역과 가이드 관련 안내 영역에 사용됩니다.</p>
               </article>
             </div>
           </div>
@@ -1561,6 +2070,14 @@
       if(visible) setActiveNav(visible.target.id);
     },{threshold:[.32,.5,.68]});
     sectionIds.forEach(id=>observer.observe(document.getElementById(id)));
+    function showUniformModel(key){
+      document.querySelectorAll(".uniform-model-tab").forEach(tab=>{
+        tab.classList.toggle("active", tab.dataset.uniformModel===key);
+      });
+      document.querySelectorAll(".uniform-model-panel").forEach(panel=>{
+        panel.classList.toggle("active", panel.id===`uniform-model-${key}`);
+      });
+    }
     document.addEventListener("keydown",e=>{
       if(e.key==="Escape"){
         hideModal();
