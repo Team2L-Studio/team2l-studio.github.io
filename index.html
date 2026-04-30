@@ -238,6 +238,51 @@
     .mark-home-button:hover img{transform:translateY(-3px) scale(1.03);filter:drop-shadow(0 0 28px rgba(201,169,106,.28))}
     .mark-caption{margin-top:10px;color:var(--muted);font-size:12px;text-align:center;letter-spacing:.04em}
 
+    .mark-overview-card{padding:22px}
+    .mark-overview-card h3{margin:0 0 12px;color:var(--gold2);font-size:20px}
+    .mark-overview-card p{margin:14px 0 0;color:var(--soft);line-height:1.75;font-size:14px}
+    .mark-set-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+      margin-top:14px;
+    }
+    .mark-set-item{
+      min-height:250px;
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(circle at 50% 35%,rgba(201,169,106,.08),transparent 52%),
+        linear-gradient(180deg,rgba(255,255,255,.04),rgba(0,0,0,.18));
+      border:1px solid rgba(201,169,106,.16);
+    }
+    .mark-set-item img{
+      width:100%;
+      max-width:190px;
+      max-height:190px;
+      object-fit:contain;
+      filter:drop-shadow(0 14px 28px rgba(0,0,0,.35));
+    }
+    .mark-set-label{
+      margin-top:12px;
+      color:var(--gold2);
+      font-size:13px;
+      font-weight:800;
+      text-align:center;
+      letter-spacing:.03em;
+    }
+    .mark-set-sub{
+      margin-top:5px;
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
+      line-height:1.5;
+    }
+
+
     .tablet-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
@@ -760,6 +805,7 @@
       .pad-cell{border-right:0;border-bottom:1px solid var(--line)}
       .mark-image-wrap{flex-direction:column}
       .mark-image{width:100%}
+      .mark-set-grid{grid-template-columns:1fr}
     }
     @media(max-width:620px){
       .section{padding:64px 0}
@@ -1010,42 +1056,32 @@
           </div>
 
           <div class="mark-section">
-            <div class="mark-grid">
-              <article class="mark-card card">
-                <h3>공통 마크</h3>
-                <div class="mark-image-wrap">
-                  <div class="mark-image">
-                    <button class="mark-home-button" onclick="goHome()" aria-label="서율 관리청 공통 엠블럼, 메인 화면으로 이동">
-                      <img src="seoyul-bureau-emblem.png" alt="서율 관리청 공통 엠블럼">
-                    </button>
-                  </div>
-                </div>
-                <div class="mark-caption">서율 관리청 공통 엠블럼 · 클릭 시 메인 화면으로 이동</div>
-                <p>서율 관리청의 통합 기관 마크입니다. 가이드와 센티넬을 모두 관리하는 상위 기관의 공식 인장으로 사용됩니다.</p>
-              </article>
+            <article class="mark-overview-card card">
+              <h3>공동 마크</h3>
+              <div class="mark-set-grid" aria-label="서율 관리청 공통 및 직군 전용 마크">
+                <figure class="mark-set-item">
+                  <img src="seoyul-bureau-emblem.png" alt="서율 관리청 공통 엠블럼">
+                  <figcaption class="mark-set-label">공동 마크</figcaption>
+                  <div class="mark-set-sub">서율 관리청 공통 엠블럼</div>
+                </figure>
 
-              <article class="mark-card card">
-                <h3>센티넬 표식</h3>
-                <div class="mark-image-wrap">
-                  <div>
-                    <div class="mark-image"><img src="sentinel-emblem.jpg" alt="센티넬 엠블럼"></div>
-                    <div class="mark-caption">센티넬 엠블럼</div>
-                  </div>
-                </div>
-                <p>전투, 제압, 게이트 진입, 위험 대응을 뜻합니다. 현장 투입 인력과 고위험 전투 직군의 식별 표식으로 사용됩니다.</p>
-              </article>
+                <figure class="mark-set-item">
+                  <img src="sentinel-emblem.png" alt="센티넬 전용 마크">
+                  <figcaption class="mark-set-label">센티넬 전용 마크</figcaption>
+                  <div class="mark-set-sub">센티넬 직군 표식</div>
+                </figure>
 
-              <article class="mark-card card">
-                <h3>가이드 표식</h3>
-                <div class="mark-image-wrap">
-                  <div>
-                    <div class="mark-image"><img src="guide-emblem.jpg" alt="가이드 엠블럼"></div>
-                    <div class="mark-caption">가이드 엠블럼</div>
-                  </div>
-                </div>
-                <p>안정 파장, 폭주 억제, 접촉 가이딩, 에너지 조율을 뜻합니다. 센티넬의 오염도 안정화와 현장 회복 절차를 담당하는 직군 표식입니다.</p>
-              </article>
-            </div>
+                <figure class="mark-set-item">
+                  <img src="guide-emblem.png" alt="가이드 전용 마크">
+                  <figcaption class="mark-set-label">가이드 전용 마크</figcaption>
+                  <div class="mark-set-sub">가이드 직군 표식</div>
+                </figure>
+              </div>
+              <p>
+                서율 관리청의 통합 기관 마크와 직군별 전용 표식입니다.
+                공동 마크는 상위 기관의 공식 인장으로, 센티넬 전용 마크와 가이드 전용 마크는 각 직군 식별 표식으로 사용됩니다.
+              </p>
+            </article>
           </div>
         </div>
       </section>
@@ -1416,7 +1452,7 @@
             "name": "비비안",
             "image": "bi.png",
             "details": {
-                  "영문명": "Vivian / Bi An",
+                  "영문명": "Vivian",
                   "나이": "23",
                   "키": "189cm",
                   "소속": "서율 관리청 / 센티넬 관리국",
